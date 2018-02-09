@@ -1,6 +1,7 @@
 ---
 title: "query and control virtio version"
 date: 2018-02-07T12:51:26+01:00
+tags: ["libvirt", "qemu", "virtio"]
 draft: false
 ---
 
