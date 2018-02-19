@@ -2,7 +2,7 @@
 title: "Live Migration with changing Rom sizes"
 date: 2018-02-15T13:51:46+01:00
 tags: ["qemu", "migration", "option-roms"]
-draft: true
+draft: false
 ---
 
 # Live Migration with changing Rom sizes #
