@@ -29,7 +29,7 @@ features implemented via it's bios called [SLOF](https://github.com/aik/SLOF/).
 
 In an effort to get more PXE features to s390x they reused some of that code and
 also bundled it with their ROM. This is actually part of [qemu 3.0](https://wiki.qemu.org/ChangeLog/3.0#s390_firmware)
-but to make it more usable for users and automation software was
+but to make it more usable for users and automation software it was
 [SRU'ed](https://wiki.ubuntu.com/StableReleaseUpdates)
 to [Bionic and Cosmic](https://bugs.launchpad.net/ubuntu/+source/qemu/+bug/1790901).
 Due to that it is available on the last [Ubuntu LTS](https://wiki.ubuntu.com/LTS)
@@ -45,7 +45,7 @@ There are plenty of ways to [install on s390x](https://wiki.ubuntu.com/S390X#Ins
 All of them usually seem odd to non System z people.
 So lets add PXE based install into KVM as something that looks more familiar.
 
-There is already a [s390x netboot image](http://ports.ubuntu.com/ubuntu-ports/dists/cosmic/main/installer-s390x/current/images/generic/)
+There is already a [s390x d-i image](http://ports.ubuntu.com/ubuntu-ports/dists/bionic/main/installer-s390x/current/images/generic/)
 that can be used on [LPAR installations](https://wiki.ubuntu.com/S390X/Installation%20In%20LPAR).
 And like the `ubuntu.ins` file there would tell the duo of
 [LPAR](https://en.wikipedia.org/wiki/Logical_partition) and
@@ -58,7 +58,7 @@ The following provides all we need for a basic netboot implementing a
 [PXE configuration file](https://www.syslinux.org/wiki/index.php?title=Config).
 
 ```shell
-$ mkdir -p /srv/tftp/pxelinux.cfg
+$ sudo mkdir -p /srv/tftp/pxelinux.cfg
 $ cat << EOF | sudo tee /srv/tftp/pxelinux.cfg/default
 label ubuntu
    kernel kernel.ubuntu
@@ -69,13 +69,13 @@ EOF
 Then make the netboot kernel and initrd available in your tftp directory
 
 ```shell
-$ wget -P /srv/tftp http://ports.ubuntu.com/ubuntu-ports/dists/bionic/main/installer-s390x/current/images/generic/kernel.ubuntu
-$ wget -P /srv/tftp http://ports.ubuntu.com/ubuntu-ports/dists/bionic/main/installer-s390x/current/images/generic/initrd.ubuntu
+$ sudo wget -P /srv/tftp http://ports.ubuntu.com/ubuntu-ports/dists/bionic/main/installer-s390x/current/images/generic/kernel.ubuntu
+$ sudo wget -P /srv/tftp http://ports.ubuntu.com/ubuntu-ports/dists/bionic/main/installer-s390x/current/images/generic/initrd.ubuntu
 ```
 
 ### Step II - prepare a guest ###
 
-I usually recommend using KVM through libvirt and for most common experiments.
+I usually recommend using KVM through libvirt for most cases.
 Actually most of the time through [uvtool](https://help.ubuntu.com/lts/serverguide/cloud-images-and-uvtool.html)
 which helps you to work with [cloud images](https://cloud-images.ubuntu.com/) easily.
 
@@ -110,7 +110,7 @@ $ virsh define blog-netboot.xml
 
 ### Step III - prepare guest network ###
 
-Libvirt can provide the tftp service for your through the dnsmasq daemon that it will spawn anyway.
+Libvirt can provide the tftp service for you through the dnsmasq daemon that it will spawn anyway.
 To do so add a snippet like the following to your default network configuration.
 
 ```xml
@@ -168,7 +168,7 @@ From here it depends on your actual needs which way you want to go further with 
 
 ### Outlook and next steps ###
 
-To boot the [netboot installer](http://ports.ubuntu.com/ubuntu-ports/dists/cosmic/main/installer-s390x/current/images/generic/) was just a nice example and quite close to compare it to older instructions.
+To boot the [netboot installer](http://ports.ubuntu.com/ubuntu-ports/dists/bionic/main/installer-s390x/current/images/generic/) was just a nice example and quite close to compare it to older instructions.
 But I recommend to become more cloudy and consider booting cloud images like that.
 You can do so ephemeral or with a config that makes it install to an attached disk.
 And this is not only a great use case, it also is [easy](https://tutorials.ubuntu.com/tutorial/create-kvm-pods-with-maas#0)
