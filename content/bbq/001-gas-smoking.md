@@ -2,7 +2,7 @@
 title: "Better smoking on a gas grill"
 date: 2019-09-03T13:51:26+01:00
 tags: ["BBQ", "smoke", "gas" ]
-draft: true
+draft: false
 ---
 
 # Better smoking on a gas grill #

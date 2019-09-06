@@ -24,10 +24,10 @@ googleAnalytics = ""
     name = "Tech"
     weight = 1
 
-#[[menu.main]]
-#    url = "/bbq/"
-#    name = "BBQ"
-#    weight = 2
+[[menu.main]]
+    url = "/bbq/"
+    name = "BBQ"
+    weight = 2
 
 [[menu.main]]
     url = "/about"
