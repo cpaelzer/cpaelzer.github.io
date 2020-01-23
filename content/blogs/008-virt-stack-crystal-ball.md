@@ -1,12 +1,12 @@
 ---
-title: "The Ubuntu Virtualization Stack Crystal Ball"
+title: "Ubuntu Virtualization Stack Crystal Ball"
 date: 2020-01-20T12:08:27+02:00
 tags: ["libvirt", "ubuntu", "qemu", "version"]
 draft: true
 ---
 
-# The Ubuntu Virtualization Stack Crystal Ball #
-## a.k.a which version of QEMU and libvirt will be in Ubuntu? ##
+# Ubuntu Virtualization Stack Crystal Ball #
+## a.k.a which version of QEMU/libvirt will be in the next Ubuntu release? ##
 
 
 ## Background
