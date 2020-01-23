@@ -2,7 +2,7 @@
 title: "Ubuntu Virtualization Stack Crystal Ball"
 date: 2020-01-20T12:08:27+02:00
 tags: ["libvirt", "ubuntu", "qemu", "version"]
-draft: true
+draft: false
 ---
 
 # Ubuntu Virtualization Stack Crystal Ball #
