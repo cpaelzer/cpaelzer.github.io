@@ -56,19 +56,18 @@ specifically the feature freeze dates of Ubuntu.
 With these dates and versions in hand the following constraints are taken
 into account:
 
-*   Versions should be as new as possible to get the latest features and fixes
-    to our users
-*   Include at least the libvirt version that _follows_ the QEMU release.
+*   Considering upstream release dates and test/verification time package
+    versions should be as new as possible to get the latest features and fixes
+    to Ubuntu users.
+*   Include a libvirt version that is released _after_ the QEMU release.
     This is a lesson learned from the past and ensures that most features and
     any quirks needed are in there.
 *   Consider availability of other dependent packages like iPXE, slof,
     virt-manager, etc. for compatibility with the newer versions of QEMU and
-    libvirt
-*   Upstream release dates + packaging time + testing should be well before
-    the Ubuntu feature freeze date
+    libvirt.
 
 Once those considerations are taken into account the versions that need to be
-targeted usually become clear.
+targeted become clear.
 
 ## Ubuntu Focal Fossa
 
@@ -77,37 +76,35 @@ constraints led us to choose QEMU version 4.2 (December 2019) and libvirt
 version 6.0 (January 2020) as the versions to target.
 
 We prefer providing the newer QEMU 4.2 over 4.1 to ensure the best possible
-feature set to our users. However, while QEMU 5.0 may release before Focal it
-is too late in the cycle to pick up.
+feature set to our users. The following qemu 5.0 won't be released yet at
+the time of the 20.04 release.
 
 
 ## FAQ
 
-There are a bunch of common further questions, let me try to answer them right
-away as well.
+There are a bunch of questions commonly asked about the topic, let me
+try to answer them right away:
 
-Q: _Why does Ubuntu skip QEMU and libvirt versions?_
+Q: _Why does Ubuntu not release every QEMU and libvirt versions?_
 
-A: Releasing each version is overall more costly than beneficial. It causes
-additional work that is better spent elsewhere to get other components fixed
-and updated. Furthermore having “_several quick but potentially error prone
-updates_” policy works for some components, but the virt-stack is not one of
-them.
-
-The virtualization stack is utilized through the Ubuntu project. Pushing
-releases more often increases the chance to slow down or even bring to a
-grinding halt the project. If new features require that we need to work on
-them in advance we usually do so in
+A: This avoids fallout for Ubuntu users the development release.
+Having “_several quick but potentially error prone updates_” policy works for
+some components, but the virt-stack is not one of them.
+The virtualization stack is utilized throughout the test stack of the Ubuntu
+project and many others. Pushing releases more often increases the chance to
+slow down or even bring the project to a grinding halt. If new features require
+that we need to work on them in advance we usually do so in
 [PPAs](https://help.launchpad.net/Packaging/PPA) without affecting the rest
-of Ubuntu.
+of Ubuntu. Therefore releasing each version would be more costly than beneficial
+for the Ubuntu users.
 
 Q: _Really, that means QEMU might be outdated by 3 months when Ubuntu 20.04
 releases?_
 
-A: That is not accurate. It is not outdated but stabilized for three months.
+A: That is not accurate. It is not _outdated_ but _stabilized_ for three months.
 We continue testing more uncommon cases and ensure that features continue to
 work. There might be an upstream stable release like 4.2.1 that we will pull
-in, but even if there is not we usually go through recent git commits and
+in, but even if there is not we go through recent git commits and
 cherry pick fixes for stabilization of QEMU/Libvirt before an Ubuntu release
 is finalized.
 
@@ -125,5 +122,5 @@ latest virtualization packages. How can I get both?_
 
 A: For exactly that use case in the wider context of Openstack there is
 the [Ubuntu Cloud Archive](https://wiki.ubuntu.com/OpenStack/CloudArchive)
-which usually backports the most recent virtualization stack from the latest
+which backports the most recent virtualization stack from the latest
 Ubuntu LTS to previous LTS releases.
