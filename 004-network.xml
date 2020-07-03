@@ -1,0 +1,13 @@
+<network>
+  <name>default</name>
+  <uuid>90f45646-1abd-4537-ba1c-10d7cb509047</uuid>
+  <forward mode='nat'/>
+  <bridge name='virbr0' stp='on' delay='0'/>
+  <mac address='52:54:00:6e:c3:70'/>
+  <ip address='192.168.122.1' netmask='255.255.255.0'>
+    <tftp root='/srv/tftp'/>
+    <dhcp>
+      <range start='192.168.122.2' end='192.168.122.254'/>
+    </dhcp>
+  </ip>
+</network>

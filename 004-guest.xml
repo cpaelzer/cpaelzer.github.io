@@ -1,0 +1,24 @@
+<domain type='kvm'>
+  <name>blog-netboot</name>
+  <memory unit='KiB'>2097152</memory>
+  <vcpu placement='static'>1</vcpu>
+  <os>
+    <type arch='s390x' machine='s390-ccw-virtio-xenial'>hvm</type>
+    <boot dev='network'/>
+  </os>
+  <devices>
+    <emulator>/usr/bin/kvm</emulator>
+    <disk type='file' device='disk'>
+      <driver name='qemu' type='qcow2'/>
+      <source file='/var/lib/libvirt/images/blog-netboot.qcow2'/>
+      <target dev='vda' bus='virtio'/>
+    </disk>
+    <interface type='network'>
+      <source network='default'/>
+      <model type='virtio'/>
+    </interface>
+    <console type='pty'>
+      <target type='sclp' port='0'/>
+    </console>
+  </devices>
+</domain>
