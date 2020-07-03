@@ -9,7 +9,7 @@ googleAnalytics = ""
 [params]
     author = "Christian Ehrhardt"
     description = "because umlauts"
-    copyright = "&copy; 2018 Christian Ehrhardt - Powered by [Hugo](https://gohugo.io) and [Minimal](https://github.com/calintat/minimal)"
+    copyright = "&copy; 2018-2020 Christian Ehrhardt - Powered by [Hugo](https://gohugo.io) and [Minimal](https://github.com/calintat/minimal)"
     githubUsername = "#cpaelzer"
     accent = "green"
     showBorder = true
