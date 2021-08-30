@@ -117,6 +117,23 @@ whitepaper. Therefore I beg you (and my old self) a pardon but I just couldn't
 find a scientific enough, but fast way to satisfy myself in this short time.
 I don't want to provide bad unreliable numbers to anyone - so no numbers today :-/
 
+# Shared-FS
+
+Since this usally aligns on container use-cases shared-directory is a common
+pattern. To do so virtio-fs is available which has a server that can be spawned
+like (do not do this on the hot path of your load, or you have wasted plenty of
+time, have these ready beforehand):
+
+```plaintext
+/usr/lib/qemu/virtiofsd --socket-path=/tmp/myvhostqemu -o source=/tmp/testdir -o cache=always
+```
+
+And on the VM you can connect to it via:
+```plaintext
+... -chardev socket,id=char0,path=/tmp/myvhostqemu -device vhost-user-fs-device,queue-size=1024,chardev=char0,tag=myfs
+```
+
+
 # Drawbacks
 
 This new class of feature-focused hypervisors fills a gap between system
@@ -125,7 +142,7 @@ But you have to be sure that this is the spot your application design
 needs/wants to be at.
 
 The huge gains are mostly due to dropping features not needed for these use
-cases. But if you end up then demanding pci-passthrough, migration support to
+cases. But if you end up then demanding pci-passthrough or migration support to
 name a few, you'll end up needing a full featured hypervisor again.
 
 # Next steps
@@ -136,8 +153,8 @@ Even with a non optimized QEMU/KVM binary and configuration the guest boot and
 initialization has consumed the majority of time.
 By reducing the time the hypervisor needs to initialize this the focus to
 further improve now is even more on the guest side.
-You might consider running software directly from an initrd or later once
-available from an virtio-fs shared directory.
+You might consider running software directly from an initrd or from an
+virtio-fs shared directory.
 Also consider doing so without a full init system right into the workload that
 matters to you (*matching non system-containers*).
 
