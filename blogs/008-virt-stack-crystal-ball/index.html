@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+         
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Ubuntu Virtualization Stack Crystal Ball</title>
+        <style>
+
+    html body {
+        font-family: 'Raleway', sans-serif;
+        background-color: white;
+    }
+
+    :root {
+        --accent: green;
+        --border-width:  5px ;
+    }
+
+</style>
+
+
+<link rel="stylesheet" href="https://cpaelzer.github.io//css/main.css">
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+
+
+ <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-dark.min.css"> 
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+ 
+
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/Bash.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/Diff.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/shell.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/C&#43;&#43;.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script> 
+
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+ <meta name="generator" content="Hugo 0.92.2" />
+        
+        
+        
+    </head>
+
+    
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+
+    <body>
+         
+        <nav class="navbar navbar-default navbar-fixed-top">
+
+            <div class="container">
+
+                <div class="navbar-header">
+
+                    <a class="navbar-brand visible-xs" href="#">Ubuntu Virtualization Stack Crystal Ball</a>
+
+                    <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                </div>
+
+                <div class="collapse navbar-collapse">
+
+                    
+                        <ul class="nav navbar-nav">
+                            
+                                <li><a href="/blogs/">Tech</a></li>
+                            
+                                <li><a href="/bbq/">BBQ</a></li>
+                            
+                                <li><a href="/about">About</a></li>
+                            
+                                <li><a href="/public_gpg.txt">GPG Key</a></li>
+                            
+                        </ul>
+                    
+
+                    
+                        <ul class="nav navbar-nav navbar-right">
+                            
+                                <li class="navbar-icon"><a href="mailto:christian.ehrhardt@canonical.com"><i class="fa fa-envelope-o"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://github.com/cpaelzer/"><i class="fa fa-github"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://launchpad.net/~paelzer"><i class="fa fa-linux"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://stackoverflow.com/users/6361589/christian-ehrhardt"><i class="fa fa-stack-overflow"></i></a></li>
+                            
+                        </ul>
+                    
+
+                </div>
+
+            </div>
+
+        </nav>
+
+
+<main>
+
+    <div class="item">
+
+    
+    
+    
+
+    
+    
+
+    <h4><a href="/blogs/008-virt-stack-crystal-ball/">Ubuntu Virtualization Stack Crystal Ball</a></h4>
+    <h5>January 20, 2020</h5>
+    
+    <a href="https://cpaelzer.github.io/tags/libvirt"><kbd class="item-tag">libvirt</kbd></a>
+    
+    <a href="https://cpaelzer.github.io/tags/ubuntu"><kbd class="item-tag">ubuntu</kbd></a>
+    
+    <a href="https://cpaelzer.github.io/tags/qemu"><kbd class="item-tag">qemu</kbd></a>
+    
+    <a href="https://cpaelzer.github.io/tags/version"><kbd class="item-tag">version</kbd></a>
+    
+
+</div>
+
+
+    <br> <div class="text-justify"><h1 id="ubuntu-virtualization-stack-crystal-ball">Ubuntu Virtualization Stack Crystal Ball</h1>
+<h2 id="aka-which-version-of-qemulibvirt-will-be-in-the-next-ubuntu-release">a.k.a which version of QEMU/libvirt will be in the next Ubuntu release?</h2>
+<h2 id="background">Background</h2>
+<p>I am asked a lot of times in different contexts which version of QEMU, libvirt,
+or other components the next Ubutuntu release will contain. What this post will
+address how the upstreams manage versions and then how the Ubuntu project
+chooses a version to ship.</p>
+<h2 id="upstream">Upstream</h2>
+<p>First, consider how the two major upstreams of QEMU and libvirt handle
+versioning.</p>
+<h3 id="qemu">QEMU</h3>
+<p>QEMU publishes a release schedule with dates for each version:</p>
+<ul>
+<li><a href="https://wiki.qemu.org/Planning/5.0">https://wiki.qemu.org/Planning/5.0</a></li>
+<li><a href="https://wiki.qemu.org/Planning/4.2">https://wiki.qemu.org/Planning/4.2</a></li>
+<li><a href="https://wiki.qemu.org/Planning/4.1">https://wiki.qemu.org/Planning/4.1</a></li>
+<li><a href="https://wiki.qemu.org/Planning/4.0">https://wiki.qemu.org/Planning/4.0</a></li>
+<li><a href="https://wiki.qemu.org/Planning/3.1">https://wiki.qemu.org/Planning/3.1</a></li>
+</ul>
+<p>The upstream defines a new major release (e.g. 4.0, 5.0, etc.) every year and
+then a few minor releases (e.g. 4.1, 4.2) in that same year.</p>
+<p>Using the 4.x release as an example, this resulted in the new major release
+occurring in April and then two minor releases in August and December.
+However, keep in mind these months might vary year to year.</p>
+<h3 id="libvirt">libvirt</h3>
+<p>In recent years, libvirt releases are even more regular. Each year will set a
+new major number and there are almost monthly releases doing a minor release
+increase. See the libvirt <a href="https://www.libvirt.org/news.html">release notes</a>
+for examples</p>
+<h2 id="ubuntu-planning">Ubuntu Planning</h2>
+<p>For each Ubuntu release, we check the plans of these projects and match it to
+the <a href="https://wiki.ubuntu.com/FocalFossa/ReleaseSchedule">release schedule</a>,
+specifically the feature freeze dates of Ubuntu.</p>
+<p>With these dates and versions in hand the following constraints are taken
+into account:</p>
+<ul>
+<li>Considering upstream release dates and test/verification time package
+versions should be as new as possible to get the latest features and fixes
+to Ubuntu users.</li>
+<li>Include a libvirt version that is released <em>after</em> the QEMU release.
+This is a lesson learned from the past and ensures that most features and
+any quirks needed are in there.</li>
+<li>Consider availability of other dependent packages like iPXE, slof,
+virt-manager, etc. for compatibility with the newer versions of QEMU and
+libvirt.</li>
+</ul>
+<p>Once those considerations are taken into account the versions that need to be
+targeted become clear.</p>
+<h2 id="ubuntu-focal-fossa">Ubuntu Focal Fossa</h2>
+<p>Using Ubuntu’s next LTS release as an example, the above releases and
+constraints led us to choose QEMU version 4.2 (December 2019) and libvirt
+version 6.0 (January 2020) as the versions to target.</p>
+<p>We prefer providing the newer QEMU 4.2 over 4.1 to ensure the best possible
+feature set to our users. The following qemu 5.0 won&rsquo;t be released yet at
+the time of the 20.04 release.</p>
+<h2 id="faq">FAQ</h2>
+<p>There are a bunch of questions commonly asked about the topic, let me
+try to answer them right away:</p>
+<p>Q: <em>Why does Ubuntu not release every QEMU and libvirt versions?</em></p>
+<p>A: This avoids fallout for Ubuntu users the development release.
+Having “<em>several quick but potentially error prone updates</em>” policy works for
+some components, but the virt-stack is not one of them.
+The virtualization stack is utilized throughout the test stack of the Ubuntu
+project and many others. Pushing releases more often increases the chance to
+slow down or even bring the project to a grinding halt. If new features require
+that we need to work on them in advance we usually do so in
+<a href="https://help.launchpad.net/Packaging/PPA">PPAs</a> without affecting the rest
+of Ubuntu. Therefore releasing each version would be more costly than beneficial
+for the Ubuntu users.</p>
+<p>Q: <em>Really, that means QEMU might be outdated by 3 months when Ubuntu 20.04
+releases?</em></p>
+<p>A: That is not accurate. It is not <em>outdated</em> but <em>stabilized</em> for three months.
+We continue testing more uncommon cases and ensure that features continue to
+work. There might be an upstream stable release like 4.2.1 that we will pull
+in, but even if there is not we go through recent git commits and
+cherry pick fixes for stabilization of QEMU/Libvirt before an Ubuntu release
+is finalized.</p>
+<p>That way you get software at the best spot of the “<em>As recent as possible,
+but also as stable as possible</em>” tradeoff and from there
+<a href="https://wiki.ubuntu.com/StableReleaseUpdates">SRU Policy</a> will kick in
+which means:</p>
+<ul>
+<li>In a given Ubuntu release updates will focus on fixes and stability</li>
+<li>Just six months later there will be another Ubuntu release providing the
+newest features</li>
+</ul>
+<p>Q: <em>I want my base system to stay stable (e.g. previous LTS) and I want the
+latest virtualization packages. How can I get both?</em></p>
+<p>A: For exactly that use case in the wider context of Openstack there is
+the <a href="https://wiki.ubuntu.com/OpenStack/CloudArchive">Ubuntu Cloud Archive</a>
+which backports the most recent virtualization stack from the latest
+Ubuntu LTS to previous LTS releases.</p>
+</div>
+
+    
+    
+
+    
+
+    
+
+</main>
+
+        <footer>
+
+            <p class="copyright text-muted">© 2018-2020 Christian Ehrhardt - Powered by <a href="https://gohugo.io">Hugo</a> and <a href="https://github.com/calintat/minimal">Minimal</a></p>
+
+        </footer>
+       
+    </body>
+
+</html>
+

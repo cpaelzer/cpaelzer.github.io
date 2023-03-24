@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+         
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>SSH login got slower, be happy!</title>
+        <style>
+
+    html body {
+        font-family: 'Raleway', sans-serif;
+        background-color: white;
+    }
+
+    :root {
+        --accent: green;
+        --border-width:  5px ;
+    }
+
+</style>
+
+
+<link rel="stylesheet" href="https://cpaelzer.github.io//css/main.css">
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+
+
+ <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-dark.min.css"> 
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+ 
+
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/Bash.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/Diff.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/shell.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/C&#43;&#43;.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script> 
+
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+ <meta name="generator" content="Hugo 0.92.2" />
+        
+        
+        
+    </head>
+
+    
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+
+    <body>
+         
+        <nav class="navbar navbar-default navbar-fixed-top">
+
+            <div class="container">
+
+                <div class="navbar-header">
+
+                    <a class="navbar-brand visible-xs" href="#">SSH login got slower, be happy!</a>
+
+                    <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                </div>
+
+                <div class="collapse navbar-collapse">
+
+                    
+                        <ul class="nav navbar-nav">
+                            
+                                <li><a href="/blogs/">Tech</a></li>
+                            
+                                <li><a href="/bbq/">BBQ</a></li>
+                            
+                                <li><a href="/about">About</a></li>
+                            
+                                <li><a href="/public_gpg.txt">GPG Key</a></li>
+                            
+                        </ul>
+                    
+
+                    
+                        <ul class="nav navbar-nav navbar-right">
+                            
+                                <li class="navbar-icon"><a href="mailto:christian.ehrhardt@canonical.com"><i class="fa fa-envelope-o"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://github.com/cpaelzer/"><i class="fa fa-github"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://launchpad.net/~paelzer"><i class="fa fa-linux"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://stackoverflow.com/users/6361589/christian-ehrhardt"><i class="fa fa-stack-overflow"></i></a></li>
+                            
+                        </ul>
+                    
+
+                </div>
+
+            </div>
+
+        </nav>
+
+
+<main>
+
+    <div class="item">
+
+    
+    
+    
+
+    
+    
+
+    <h4><a href="/blogs/010-ssh-got-slower/">SSH login got slower, be happy!</a></h4>
+    <h5>March 24, 2023</h5>
+    
+    <a href="https://cpaelzer.github.io/tags/ssh"><kbd class="item-tag">ssh</kbd></a>
+    
+    <a href="https://cpaelzer.github.io/tags/ubuntu"><kbd class="item-tag">Ubuntu</kbd></a>
+    
+    <a href="https://cpaelzer.github.io/tags/performance"><kbd class="item-tag">performance</kbd></a>
+    
+    <a href="https://cpaelzer.github.io/tags/security"><kbd class="item-tag">security</kbd></a>
+    
+    <a href="https://cpaelzer.github.io/tags/post-quantum"><kbd class="item-tag">post-quantum</kbd></a>
+    
+
+</div>
+
+
+    <br> <div class="text-justify"><h1 id="ssh-login-got-slower-be-happy">&ldquo;SSH login got slower, be happy!&rdquo;</h1>
+<h2 id="aka-a-quantum-slower-against-quantum-attacks">a.k.a.: a quantum slower against quantum attacks</h2>
+<p>We regularly gather all kind of metrics to ensure Ubuntu is/stays/gets
+(depends on your POV) great. One of the metrics that I wanted to look at
+for way too long, but the change was too small to do so earlier was our
+check on non interactive ssh login speed.</p>
+<p>In that test we check how quickly you can log into ssh, do nothing and return
+which was a lessons learned from <a href="https://bugs.launchpad.net/ubuntu/+source/update-motd/+bug/1893716">a bug years ago</a>
+that it is better to watch for. To be fair it is a corner case as most people
+do something after login and that outweighs things by several order of
+magnitude.</p>
+<p>So while no one complained and most likely only very few even noticed, I&rsquo;ve
+looked deeper into a regression Ubuntu 22.10 Kinetic of about 100ms-150ms.
+Tracking that down wasn&rsquo;t hard, but interesting.</p>
+<h2 id="the-problem">The Problem</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e"># Jammy</span>
+ubuntu:~$ hyperfine --style<span style="color:#f92672">=</span>basic --warmup <span style="color:#ae81ff">10</span> --runs<span style="color:#f92672">=</span><span style="color:#ae81ff">500</span> --export-json<span style="color:#f92672">=</span>results-warm.json <span style="color:#e6db74">&#34;ssh -o StrictHostKeyChecking=accept-new localhost true&#34;</span>
+Benchmark 1: ssh -o StrictHostKeyChecking<span style="color:#f92672">=</span>accept-new localhost true
+  Time <span style="color:#f92672">(</span>mean ± σ<span style="color:#f92672">)</span>:     250.9 ms ±  21.6 ms    <span style="color:#f92672">[</span>User: 27.3 ms, System: 4.7 ms<span style="color:#f92672">]</span>
+  Range <span style="color:#f92672">(</span>min … max<span style="color:#f92672">)</span>:   218.9 ms … 394.4 ms    <span style="color:#ae81ff">500</span> runs
+
+<span style="color:#75715e"># Lunar</span>
+ubuntu:~$ hyperfine --style<span style="color:#f92672">=</span>basic --warmup <span style="color:#ae81ff">10</span> --runs<span style="color:#f92672">=</span><span style="color:#ae81ff">500</span> --export-json<span style="color:#f92672">=</span>results-warm.json <span style="color:#e6db74">&#34;ssh -o StrictHostKeyChecking=accept-new localhost true&#34;</span>
+Benchmark 1: ssh -o StrictHostKeyChecking<span style="color:#f92672">=</span>accept-new localhost true
+  Time <span style="color:#f92672">(</span>mean ± σ<span style="color:#f92672">)</span>:     400.1 ms ±  32.1 ms    <span style="color:#f92672">[</span>User: 164.2 ms, System: 6.1 ms<span style="color:#f92672">]</span>
+  Range <span style="color:#f92672">(</span>min … max<span style="color:#f92672">)</span>:   354.4 ms … 547.0 ms    <span style="color:#ae81ff">500</span> runs
+</code></pre></div><p>Along that slowdown there also is quite an increase in Userspace CPU
+consumption by about x6.</p>
+<p>Due to the old issue I was first looking at things like MOTD, but that was
+unchanged, so what now &hellip;?</p>
+<h2 id="follow-the-money---follow-the-cpu">&ldquo;Follow the Money&rdquo; -&gt; &ldquo;Follow the CPU&rdquo;</h2>
+<p>Every performance engineer will be happy to talk hours about why it is great
+when a regression goes along a CPU consumption change :-) The tech to track
+that is established and mature (and much nicer than these finicky jitter, delay
+or similar timing issues.</p>
+<p>In this case <code>perf</code> quickly pointed to the guilty being <code>ssh</code> and since
+I ran server and host on the same system, I mean client side <code>ssh</code>, not the
+servers <code>sshd</code> (that will be important later).</p>
+<pre tabindex="0"><code>Jammy                      Lunar
+43.58%  swapper            41.63%  ssh
+17.60%  sshd               27.60%  swapper
+11.77%  ssh                14.29%  sshd
+ 2.33%  systemd             1.61%  systemd
+ 2.14%  dbus-daemon         1.42%  dbus-daemon
+ 1.66%  systemd-logind      1.09%  systemd-logind
+ 1.47%  run-parts           0.92%  run-parts
+</code></pre><h2 id="did-ssh-betray-us">Did ssh betray us?</h2>
+<p>Wondering if <code>ssh</code> hates us and stabbed us in the back wasting precious CPU
+cycles I decided to ask before judging (generally recommended).</p>
+<p>Running the same test in with <code>-vv</code> set quickly shows, all is mostly the same
+except one little but important detail - <a href="https://acronyms.thefreedictionary.com/KEX">KEX</a>.
+If you are a confused banking expert, no - not the Kansai Commodities Exchange,
+this is Key Exchange.</p>
+<pre tabindex="0"><code># Jammy
+debug1: kex: algorithm: curve25519-sha256
+
+# Lunar
+debug1: kex: algorithm: sntrup761x25519-sha512@openssh.com
+</code></pre><p>And you might think WTH sntr..what I can&rsquo;t even pronounce this, what is it?
+First of all, this isn&rsquo;t entirely new - Jammy supports the same algorithm as
+<code>ssh</code> is happy to tell you the same on both systems compared:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ ssh -Q kex
+diffie-hellman-group1-sha1
+diffie-hellman-group14-sha1
+diffie-hellman-group14-sha256
+diffie-hellman-group16-sha512
+diffie-hellman-group18-sha512
+diffie-hellman-group-exchange-sha1
+diffie-hellman-group-exchange-sha256
+ecdh-sha2-nistp256
+ecdh-sha2-nistp384
+ecdh-sha2-nistp521
+curve25519-sha256
+curve25519-sha256@libssh.org
+sntrup761x25519-sha512@openssh.com
+</code></pre></div><p>Furthermore setting both environments to use the same KEX via
+<code>-oKexAlgorithms=curve25519-sha256</code> or
+<code>-oKexAlgorithms=sntrup761x25519-sha512@openssh.com</code> makes them both on deliver
+the very same result in regard to timing and CPU consumption.</p>
+<p>As usual once you actually know what you search it is easy to find.
+The change comes from <a href="https://anongit.mindrot.org/openssh.git/commit/?id=32dc1c29a4ac">this upstream commit</a>
+that switched the default.
+And this is the big deal, <code>ssh</code> of course did not betray us. It is an
+intentional change that is important to be done now to be safe in the future.</p>
+<h2 id="matters-of-scale">Matters of scale</h2>
+<p>I mentioned above that it will be important that these extra CPU cycles
+are mostly consumed on the client side. The reason for that is that a server
+potentially handles a lot of connections and thereby might be overloaded
+by the extra effort.</p>
+<p>But spending the time on the client(s) is great as that will naturally scale
+with the amount of connections.</p>
+<h2 id="post-quantum-is-not-a-letter">&ldquo;Post quantum&rdquo; is not a letter</h2>
+<p>There has been a looming doom in IT due to the &ldquo;quantum computer vs encryption&rdquo;
+fight. And while those shiny super-cool(ed) systems didn&rsquo;t win yet, the strategy
+of <a href="https://www.siliconrepublic.com/enterprise/quantum-apocalypse-store-now-decrypt-later-encryption">store-now-decrypt-later</a>
+makes it important that you prevent it now to be safe in the future.</p>
+<p>If you want a quick, well presented summary on the general topic you might
+enjoy <a href="https://www.youtube.com/watch?v=-UrdExQW0cs">the recent summary</a>
+by the always great Veritasium channel.</p>
+<p>And yeah, that is the reason that you should be happy to have a slightly slower
+login now - enjoy the (usually short) feeling of safety.</p>
+</div>
+
+    
+    
+
+    
+
+    
+
+</main>
+
+        <footer>
+
+            <p class="copyright text-muted">© 2018-2020 Christian Ehrhardt - Powered by <a href="https://gohugo.io">Hugo</a> and <a href="https://github.com/calintat/minimal">Minimal</a></p>
+
+        </footer>
+       
+    </body>
+
+</html>
+

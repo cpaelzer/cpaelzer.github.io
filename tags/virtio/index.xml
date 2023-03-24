@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>virtio on Pälzer</title>
+    <link>https://cpaelzer.github.io/tags/virtio/</link>
+    <description>Recent content in virtio on Pälzer</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 07 Feb 2018 12:51:26 +0100</lastBuildDate><atom:link href="https://cpaelzer.github.io/tags/virtio/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>query and control virtio version</title>
+      <link>https://cpaelzer.github.io/blogs/001-qemu-libvirt-virtio-version/</link>
+      <pubDate>Wed, 07 Feb 2018 12:51:26 +0100</pubDate>
+      
+      <guid>https://cpaelzer.github.io/blogs/001-qemu-libvirt-virtio-version/</guid>
+      <description>virtio: modern/legacy = ??? a.k.a puzzlement about inquiring or controlling virtio revisions via libvirt When looking around how to check for the current setting of modern/legacy virtio, or how to control it via libvirt I only found dead ends at first.
+ If you search how to get some info about it you will find query-virtio/info virtio, but after 5 versions being discussed nothing is merged still. If instead you search how to better control the version you&amp;rsquo;ll find virtio revision, but also 5 versions discussed until declared postponed.</description>
+    </item>
+    
+  </channel>
+</rss>

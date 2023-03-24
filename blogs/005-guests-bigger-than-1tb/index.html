@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+         
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>KVM Guests bigger than 1TiB</title>
+        <style>
+
+    html body {
+        font-family: 'Raleway', sans-serif;
+        background-color: white;
+    }
+
+    :root {
+        --accent: green;
+        --border-width:  5px ;
+    }
+
+</style>
+
+
+<link rel="stylesheet" href="https://cpaelzer.github.io//css/main.css">
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+
+
+ <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-dark.min.css"> 
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+ 
+
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/Bash.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/Diff.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/shell.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/C&#43;&#43;.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script> 
+
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+ <meta name="generator" content="Hugo 0.92.2" />
+        
+        
+        
+    </head>
+
+    
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+
+    <body>
+         
+        <nav class="navbar navbar-default navbar-fixed-top">
+
+            <div class="container">
+
+                <div class="navbar-header">
+
+                    <a class="navbar-brand visible-xs" href="#">KVM Guests bigger than 1TiB</a>
+
+                    <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                </div>
+
+                <div class="collapse navbar-collapse">
+
+                    
+                        <ul class="nav navbar-nav">
+                            
+                                <li><a href="/blogs/">Tech</a></li>
+                            
+                                <li><a href="/bbq/">BBQ</a></li>
+                            
+                                <li><a href="/about">About</a></li>
+                            
+                                <li><a href="/public_gpg.txt">GPG Key</a></li>
+                            
+                        </ul>
+                    
+
+                    
+                        <ul class="nav navbar-nav navbar-right">
+                            
+                                <li class="navbar-icon"><a href="mailto:christian.ehrhardt@canonical.com"><i class="fa fa-envelope-o"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://github.com/cpaelzer/"><i class="fa fa-github"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://launchpad.net/~paelzer"><i class="fa fa-linux"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://stackoverflow.com/users/6361589/christian-ehrhardt"><i class="fa fa-stack-overflow"></i></a></li>
+                            
+                        </ul>
+                    
+
+                </div>
+
+            </div>
+
+        </nav>
+
+
+<main>
+
+    <div class="item">
+
+    
+    
+    
+
+    
+    
+
+    <h4><a href="/blogs/005-guests-bigger-than-1tb/">KVM Guests bigger than 1TiB</a></h4>
+    <h5>April 17, 2019</h5>
+    
+    <a href="https://cpaelzer.github.io/tags/libvirt"><kbd class="item-tag">libvirt</kbd></a>
+    
+    <a href="https://cpaelzer.github.io/tags/qemu"><kbd class="item-tag">qemu</kbd></a>
+    
+
+</div>
+
+
+    <br> <div class="text-justify"><h1 id="kvm-guests-bigger-than-1tib">KVM Guests bigger than 1TiB</h1>
+<h2 id="aka-size-matters">a.k.a size matters</h2>
+<h3 id="background-addressing-memory">Background addressing memory</h3>
+<p>More memory is almost always good, but to be able to use it it needs to be addressable as well.
+CPU&rsquo;s are different and you can check yours how many bits are really supported.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ cat /proc/cpuinfo | grep <span style="color:#e6db74">&#39;^address sizes&#39;</span>
+...
+<span style="color:#75715e"># an older server with a E5-2620</span>
+address sizes   : <span style="color:#ae81ff">46</span> bits physical, <span style="color:#ae81ff">48</span> bits virtual
+<span style="color:#75715e"># a laptop with an i7-8550U</span>
+address sizes   : <span style="color:#ae81ff">39</span> bits physical, <span style="color:#ae81ff">48</span> bits virtual
+</code></pre></div><p>And ignoring all other constraints, to address 1TiB you&rsquo;ll need 40 bits,
+so if you want to have more than 1TiB of guest memory it needs more than 40 bits to address it.</p>
+<h3 id="qemu-libvirt-and-addressing-bits-exposed-to-the-guest">Qemu, Libvirt and addressing bits exposed to the guest</h3>
+<p>Ideally you&rsquo;d want your virtual CPU&rsquo;s in the guest to match the Hosts physical bits.
+But then you clearly do not want to change the amount of physical bits when e.g. migrating between two hosts.</p>
+<p>Therefore qemu by default chose to <a href="https://git.qemu.org/?p=qemu.git;a=blob;f=target-i386/cpu.c;h=89ca3268d4e998eb4877b123391630652bb5d300;hb=11f6fee5766#l3020">expose 40 bits</a>
+on x86 which also is what <a href="https://wiki.qemu.org/Documentation/TCG">TCG</a> supports.</p>
+<p>As we learned above that will not be enough to have guests &gt;1TiB.
+To fix that qemu can be told to either use a defined amount of physical bits using the <code>phys-bits</code> attribute of the CPU definition.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ qemu-system-x86_64 ... -cpu ...,phys-bits<span style="color:#f92672">=</span><span style="color:#ae81ff">42</span>
+</code></pre></div><p>As mentioned above you&rsquo;d actually best want host and guest phys bits to match and this is where <a href="https://git.qemu.org/?p=qemu.git;a=blob;f=target-i386/cpu.c;h=89ca3268d4e998eb4877b123391630652bb5d300;hb=11f6fee5766#l3020"><code>host-phys-bits</code></a>
+comes into play automatically passing the amount of bits that your host CPU has.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ qemu-system-x86_64 ... -cpu ...,host-phys-bits
+</code></pre></div><p>OK, problem solved you might think - why not make host-phys-bits the default then?
+Well, as mentioned before in virtualization you want predictability of how the guest is constructed.
+You want no difference if you start the same guest the same way on two systems and neither do you want to change things when migrating.</p>
+<p>Still you&rsquo;d think then you&rsquo;d just configure your libvirt, OpenStack or whatever else is managing your guests to set <code>host-phys-bits</code> or <code>phys-bits</code> as needed.
+And there is the problem, as of today libvirt (and due to that all higher level stacks that manage guests through libvirt) can not express <code>[host-]phys-bits</code>.
+This is a known <a href="https://bugs.launchpad.net/ubuntu/+source/qemu/+bug/1769053">Ubuntu</a> and <a href="https://bugzilla.redhat.com/show_bug.cgi?id=1578278">upstream</a> problem.</p>
+<h3 id="special-machine-types-to-the---interim---rescue">Special machine types to the - interim - rescue</h3>
+<p>Long term everyone would prefer it to be implemented in libvirt and adopted
+in upper layers of virtualization management, but what can you do asap if you want to
+run rather large guests.</p>
+<p>Ubuntu &gt;=18.04 defines special x86 machine types with the <code>-hpb</code> suffix for
+<code>Host-Phys-Bits</code>.
+Ubuntu usually provides custom Machine types anyway to encapsulate any
+downstream or portability cases.
+And since CPU attributes can be modified in those it is easy to provide
+<em>one more</em> machine type.</p>
+<p>Qemu will tell you about all current known machine types and there you can
+see it:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ qemu-system-x86_64 -M ? | grep hpb
+pc-i440fx-bionic-hpb Ubuntu 18.04 PC <span style="color:#f92672">(</span>i440FX + PIIX, +host-phys-bits<span style="color:#f92672">=</span>true, 1996<span style="color:#f92672">)</span>
+pc-q35-bionic-hpb    Ubuntu 18.04 PC <span style="color:#f92672">(</span>Q35 + ICH9, +host-phys-bits<span style="color:#f92672">=</span>true, 2009<span style="color:#f92672">)</span>
+</code></pre></div><p>And in libvirt that would look like</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml">...
+  <span style="color:#f92672">&lt;os&gt;</span>
+    <span style="color:#f92672">&lt;type</span> <span style="color:#a6e22e">arch=</span><span style="color:#e6db74">&#39;x86_64&#39;</span> <span style="color:#a6e22e">machine=</span><span style="color:#e6db74">&#39;pc-i440fx-bionic-hpb&#39;</span><span style="color:#f92672">&gt;</span>hvm<span style="color:#f92672">&lt;/type&gt;</span>
+...
+</code></pre></div><p>This is a neat trick as defining the machine type is a rather old feature and therefore already supported in most consumers of libvirt.
+For example in OpenStack that can be set via:</p>
+<ul>
+<li>Global via <a href="https://docs.openstack.org/nova/pike/configuration/config.html">nova config</a></li>
+<li>Per image via <a href="https://docs.openstack.org/image-guide/image-metadata.html">metadata</a></li>
+</ul>
+<h3 id="outlook-and-next-steps">Outlook and next steps</h3>
+<p>As stated in the <a href="https://git.launchpad.net/ubuntu/+source/qemu/tree/debian/qemu-system-x86.NEWS?h=ubuntu/disco-devel#n3">NEWS file</a> the intention is to stop adding <code>-hpb</code> types
+once this can be expressed in libvirt and is adopted enough in higher level tools to be no more needed.</p>
+<p>But that comes down to actually implement this <a href="https://bugzilla.redhat.com/show_bug.cgi?id=1578278">upstream</a> first.
+Until then it is a simple helper to ease the life of Ubuntu users using very large guests.</p>
+</div>
+
+    
+    
+
+    
+
+    
+
+</main>
+
+        <footer>
+
+            <p class="copyright text-muted">© 2018-2020 Christian Ehrhardt - Powered by <a href="https://gohugo.io">Hugo</a> and <a href="https://github.com/calintat/minimal">Minimal</a></p>
+
+        </footer>
+       
+    </body>
+
+</html>
+

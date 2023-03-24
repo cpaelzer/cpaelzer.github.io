@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>bios on Pälzer</title>
+    <link>https://cpaelzer.github.io/tags/bios/</link>
+    <description>Recent content in bios on Pälzer</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 01 Jul 2020 12:08:27 +0200</lastBuildDate><atom:link href="https://cpaelzer.github.io/tags/bios/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Microvm, qboot and feature reduced qemu in Ubuntu</title>
+      <link>https://cpaelzer.github.io/blogs/009-microvm-in-ubuntu/</link>
+      <pubDate>Wed, 01 Jul 2020 12:08:27 +0200</pubDate>
+      
+      <guid>https://cpaelzer.github.io/blogs/009-microvm-in-ubuntu/</guid>
+      <description>&amp;ldquo;Microvm, qboot and feature reduced qemu in Ubuntu&amp;rdquo; a.k.a Throw everything over board, we need to get faster QEMU/KVM is a very powerful, complex and feature rich software stack for virtualization. But recently more and more people ask for virtualization style isolation (compared to containers), but at the same time want it to be as similar as possible to containers in terms of speedy initialization.
+For these use cases a generic QEMU sometimes is considered &amp;ldquo;too fat&amp;rdquo; and thereby ideas came up that a stripped-to-the-use-case QEMU most likely will be as fast as some emerging competitors while at the same time be already mature and compatible with a lot of other bits in the virtualization ecosystem.</description>
+    </item>
+    
+  </channel>
+</rss>

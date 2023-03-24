@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>post-quantum on Pälzer</title>
+    <link>https://cpaelzer.github.io/tags/post-quantum/</link>
+    <description>Recent content in post-quantum on Pälzer</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 24 Mar 2023 11:55:27 +0200</lastBuildDate><atom:link href="https://cpaelzer.github.io/tags/post-quantum/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>SSH login got slower, be happy!</title>
+      <link>https://cpaelzer.github.io/blogs/010-ssh-got-slower/</link>
+      <pubDate>Fri, 24 Mar 2023 11:55:27 +0200</pubDate>
+      
+      <guid>https://cpaelzer.github.io/blogs/010-ssh-got-slower/</guid>
+      <description>&amp;ldquo;SSH login got slower, be happy!&amp;rdquo; a.k.a.: a quantum slower against quantum attacks We regularly gather all kind of metrics to ensure Ubuntu is/stays/gets (depends on your POV) great. One of the metrics that I wanted to look at for way too long, but the change was too small to do so earlier was our check on non interactive ssh login speed.
+In that test we check how quickly you can log into ssh, do nothing and return which was a lessons learned from a bug years ago that it is better to watch for.</description>
+    </item>
+    
+  </channel>
+</rss>

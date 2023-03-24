@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+         
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>query and control virtio version</title>
+        <style>
+
+    html body {
+        font-family: 'Raleway', sans-serif;
+        background-color: white;
+    }
+
+    :root {
+        --accent: green;
+        --border-width:  5px ;
+    }
+
+</style>
+
+
+<link rel="stylesheet" href="https://cpaelzer.github.io//css/main.css">
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+
+
+ <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-dark.min.css"> 
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+ 
+
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/Bash.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/Diff.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/shell.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/C&#43;&#43;.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script> 
+
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+ <meta name="generator" content="Hugo 0.92.2" />
+        
+        
+        
+    </head>
+
+    
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+
+    <body>
+         
+        <nav class="navbar navbar-default navbar-fixed-top">
+
+            <div class="container">
+
+                <div class="navbar-header">
+
+                    <a class="navbar-brand visible-xs" href="#">query and control virtio version</a>
+
+                    <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                </div>
+
+                <div class="collapse navbar-collapse">
+
+                    
+                        <ul class="nav navbar-nav">
+                            
+                                <li><a href="/blogs/">Tech</a></li>
+                            
+                                <li><a href="/bbq/">BBQ</a></li>
+                            
+                                <li><a href="/about">About</a></li>
+                            
+                                <li><a href="/public_gpg.txt">GPG Key</a></li>
+                            
+                        </ul>
+                    
+
+                    
+                        <ul class="nav navbar-nav navbar-right">
+                            
+                                <li class="navbar-icon"><a href="mailto:christian.ehrhardt@canonical.com"><i class="fa fa-envelope-o"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://github.com/cpaelzer/"><i class="fa fa-github"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://launchpad.net/~paelzer"><i class="fa fa-linux"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://stackoverflow.com/users/6361589/christian-ehrhardt"><i class="fa fa-stack-overflow"></i></a></li>
+                            
+                        </ul>
+                    
+
+                </div>
+
+            </div>
+
+        </nav>
+
+
+<main>
+
+    <div class="item">
+
+    
+    
+    
+
+    
+    
+
+    <h4><a href="/blogs/001-qemu-libvirt-virtio-version/">query and control virtio version</a></h4>
+    <h5>February 7, 2018</h5>
+    
+    <a href="https://cpaelzer.github.io/tags/libvirt"><kbd class="item-tag">libvirt</kbd></a>
+    
+    <a href="https://cpaelzer.github.io/tags/qemu"><kbd class="item-tag">qemu</kbd></a>
+    
+    <a href="https://cpaelzer.github.io/tags/virtio"><kbd class="item-tag">virtio</kbd></a>
+    
+
+</div>
+
+
+    <br> <div class="text-justify"><h1 id="virtio-modernlegacy--">virtio: modern/legacy = ???</h1>
+<h3 id="aka-puzzlement-about-inquiring-or-controlling-virtio-revisions-via-libvirt">a.k.a puzzlement about inquiring or controlling virtio revisions via libvirt</h3>
+<p>When looking around how to check for the current setting of modern/legacy virtio,
+or how to control it via libvirt I only found dead ends at first.</p>
+<ul>
+<li>If you search how to get some info about it you will find <a href="https://lists.gnu.org/archive/html/qemu-devel/2017-10/msg00393.html">query-virtio/info virtio</a>, but after 5 versions being discussed nothing is merged still.</li>
+<li>If instead you search how to better control the version you&rsquo;ll find <a href="https://www.redhat.com/archives/libvir-list/2016-September/msg00227.html">virtio revision</a>, but also 5 versions discussed until declared postponed.</li>
+</ul>
+<p>You might find the baked-in defaults changing in qemu 2.7 in include/hw/compat.h by this <a href="https://git.qemu.org/?p=qemu.git;a=commit;h=9a4c0e220d8a4f82b5665d0ee95ef94d8e1509d5">commit</a>.
+But this has so many special cases and triggers that might change it, that at least I wasn#t sure what effectively is used.</p>
+<p>So what could you do to:</p>
+<ul>
+<li>check how a device is configured in regard to modern/legacy at the moment?</li>
+<li>control the modern/legacy settings via libvirt for those unable to run qemu via cmdline?</li>
+</ul>
+<p>It is not nice and clean due to above mentioned changes not having landed, but at least there is some way to do it.
+To query you can at least find the info in the qtree.
+using <a href="http://blog.vmsplice.net/2011/03/how-to-access-qemu-monitor-through.html">virsh qemu-monitor-command</a> as an easy way to access the guests monitor you can for example run.</p>
+<p><code>$ virsh qemu-monitor-command --hmp &lt;guestname&gt; 'info qtree'</code></p>
+<p>That gave me the following per device virtio-blk-pci that I was looking for:</p>
+<pre tabindex="0"><code>          dev: virtio-blk-pci, id &quot;virtio-disk0&quot;
+            [...]
+            disable-legacy = &quot;on&quot;
+            disable-modern = false
+</code></pre><p>Obviously this lets you check way more attributes and devices, so take a look even if you are looking for something else.</p>
+<p>In my case I now knew that disable-legacy was &ldquo;on&rdquo;.
+But how could I change that when - as in my case - I can&rsquo;t modify the qemu cmdline directly?</p>
+<p>There is <a href="https://libvirt.org/drvqemu.html#qemucommand">qemu:commandline</a> to control qemu commandline arguments from libvirt, but in my case I needed to inject a driver property.
+And that the disks part of the commandline is rendered independent to qemu:commandline.
+Remember that due to the lack of <a href="https://www.redhat.com/archives/libvir-list/2016-September/msg00227.html">virtio revision control</a> you can&rsquo;t just tell the libvirt to render it the way you want it per device.
+Also in addition I also had hotplug devices which would use a completely different path than the commandline anyway.</p>
+<p>The solution is to combine <a href="https://libvirt.org/drvqemu.html#qemucommand">qemu:commandline</a> with -global of the <a href="https://qemu.weilnetz.de/doc/qemu-doc.html#Standard-options">qemu standard options</a>.
+Combining all that a change to my guest looked like:</p>
+<pre tabindex="0"><code>    &gt; &lt;domain type='kvm' xmlns:qemu='http://libvirt.org/schemas/domain/qemu/1.0'&gt;
+    [...]
+    &gt;   &lt;qemu:commandline&gt;
+    &gt;     &lt;qemu:arg value='-global'/&gt;
+    &gt;     &lt;qemu:arg value='virtio-blk-pci.disable-legacy=off'/&gt;
+    &gt;   &lt;/qemu:commandline&gt;
+</code></pre><p>That made the qemu commandline have: <code>-global virtio-blk-pci.disable-legacy=off</code>
+And that in turn made my devices supporting modern and legcay as I wanted it for a test that I was doing.</p>
+<pre><code>      dev: virtio-blk-pci, id &quot;virtio-disk0&quot;
+        [...]
+        disable-legacy = &quot;off&quot;
+        disable-modern = false
+</code></pre>
+<p>I hope that might help somebody else out there as well.</p>
+<p>Dusma bleiwe &hellip;</p>
+</div>
+
+    
+    
+
+    
+
+    
+
+</main>
+
+        <footer>
+
+            <p class="copyright text-muted">© 2018-2020 Christian Ehrhardt - Powered by <a href="https://gohugo.io">Hugo</a> and <a href="https://github.com/calintat/minimal">Minimal</a></p>
+
+        </footer>
+       
+    </body>
+
+</html>
+
