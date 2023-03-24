@@ -1,7 +1,7 @@
 ---
 title: "Microvm, qboot and feature reduced qemu in Ubuntu"
 date: 2020-07-01T12:08:27+02:00
-tags: ["kvm", "Ubuntu", "qemu", "microvm", "bios"]
+tags: ["kvm", "Ubuntu", "qemu", "microvm", "bios", "performance"]
 draft: false
 ---
 
