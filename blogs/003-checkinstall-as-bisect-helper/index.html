@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+         
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Checkinstall as Bisect Helper</title>
+        <style>
+
+    html body {
+        font-family: 'Raleway', sans-serif;
+        background-color: white;
+    }
+
+    :root {
+        --accent: green;
+        --border-width:  5px ;
+    }
+
+</style>
+
+
+<link rel="stylesheet" href="https://cpaelzer.github.io//css/main.css">
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+
+
+ <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-dark.min.css"> 
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+ 
+
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/Bash.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/Diff.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/shell.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/C&#43;&#43;.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script> 
+
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+ <meta name="generator" content="Hugo 0.92.2" />
+        
+        
+        
+    </head>
+
+    
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+
+    <body>
+         
+        <nav class="navbar navbar-default navbar-fixed-top">
+
+            <div class="container">
+
+                <div class="navbar-header">
+
+                    <a class="navbar-brand visible-xs" href="#">Checkinstall as Bisect Helper</a>
+
+                    <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                </div>
+
+                <div class="collapse navbar-collapse">
+
+                    
+                        <ul class="nav navbar-nav">
+                            
+                                <li><a href="/blogs/">Tech</a></li>
+                            
+                                <li><a href="/bbq/">BBQ</a></li>
+                            
+                                <li><a href="/about">About</a></li>
+                            
+                                <li><a href="/public_gpg.txt">GPG Key</a></li>
+                            
+                        </ul>
+                    
+
+                    
+                        <ul class="nav navbar-nav navbar-right">
+                            
+                                <li class="navbar-icon"><a href="mailto:christian.ehrhardt@canonical.com"><i class="fa fa-envelope-o"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://github.com/cpaelzer/"><i class="fa fa-github"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://launchpad.net/~paelzer"><i class="fa fa-linux"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://stackoverflow.com/users/6361589/christian-ehrhardt"><i class="fa fa-stack-overflow"></i></a></li>
+                            
+                        </ul>
+                    
+
+                </div>
+
+            </div>
+
+        </nav>
+
+
+<main>
+
+    <div class="item">
+
+    
+    
+    
+
+    
+    
+
+    <h4><a href="/blogs/003-checkinstall-as-bisect-helper/">Checkinstall as Bisect Helper</a></h4>
+    <h5>September 26, 2018</h5>
+    
+    <a href="https://cpaelzer.github.io/tags/packaging"><kbd class="item-tag">packaging</kbd></a>
+    
+    <a href="https://cpaelzer.github.io/tags/bisect"><kbd class="item-tag">bisect</kbd></a>
+    
+
+</div>
+
+
+    <br> <div class="text-justify"><h1 id="checkinstall-as-bisect-helper">Checkinstall as Bisect Helper</h1>
+<h2 id="aka-grml-get-those-bisect-bits-where-i-want-them">a.k.a grml get those bisect bits where I want them</h2>
+<h3 id="background-on-bisecting">Background on Bisecting</h3>
+<p>If you try to hunt down a particular change that</p>
+<ul>
+<li>introduced an issue to debug it</li>
+<li>that fixed an issue to backport it</li>
+</ul>
+<p>then <a href="https://git-scm.com/docs/git-bisect">bisecting</a> is one of the most common tools to get it done.</p>
+<p>And it generally works great as long as you can do a cycle like the following locally:</p>
+<pre tabindex="0"><code class="language-lang-none" data-lang="lang-none">    perfect world          real world
+   +-------------+       +-------------+
+   | Bisect      |       | Bisect      |
+   |   +         |       |   +         |
+   | Build       |       | Build       |
+   +----^----+---+       +----^----+---+
+        |    |                |    |
+        |    |                |    X WTF
+        |    |                |    |
+   +----+----v---+       +----+----v---+
+   |             |       |             |
+   | Test        |       | Test        |
+   |             |       |             |
+   +-------------+       +-------------+
+</code></pre><p>But quite often there is a huge gap between building some code and being able to test it.
+When bisecting for Ubuntu packaging I often faced two types of challenges which both can be overcome with checkinstall.</p>
+<p>Challenges:</p>
+<ul>
+<li>upstream changes - Need to bisect the upstream repo, but that misses packaging bits</li>
+<li>complex deployment - makes it hard to get from build to test e.g. install on multiple systems</li>
+</ul>
+<p>I&rsquo;ll elaborate what makes these challenges annoying and then how checkinstall can sometimes help to overcome them.</p>
+<h3 id="challenge-i-you-look-for-upstream-changes">Challenge I: you look for upstream changes</h3>
+<p>Ubuntu (and Debian) have almost all of their integration logic in the <a href="http://packaging.ubuntu.com/html/debian-dir-overview.html">debian subdir</a> of a package.
+And since <a href="https://blog.ubuntu.com/2017/08/09/git-ubuntu-clone">git-ubuntu</a> we can easily switch and compare between different releases and versions or even trivially bisect between Ubuntu uploads.
+But quite often you will look for a change that was made upstream instead of a packaging change.</p>
+<p>Fortunately these days most upstreams have git repositories you can clone from to bisect.
+But those lack the debian/ subdirectory and therefore won&rsquo;t easily build .deb packages as you would need them.</p>
+<p>Sometimes you can get away with a recipe build, which merges the debian dir with the upstream repo - but TBH most of the time it fails and it is burdensome in any case.
+You often end up wishing you could do just use an upstream projects <code>make</code> but that should gives you .deb files.</p>
+<h3 id="challenge-ii-complex-deployment">Challenge II: complex deployment</h3>
+<p>In many cases you&rsquo;d think I go to a container and <code>make install</code>, but the need for .deb files increases as soon as you are not able to run something locally.
+If you need to distribute and install the compiled bits on multiple remote systems <code>make install</code> just won&rsquo;t do it without being too error prone and would require you to build on multiple systems or sync build dirs after every build hopeing the build system will not complain on changed file update time.
+Again you often end up wishing you could do just use an upstream projects <code>make</code> but that should gives you .deb files.</p>
+<h3 id="checkinstall-to-the-rescue">Checkinstall to the rescue</h3>
+<p>If you are stuck at one of the points above then <a href="http://checkinstall.izto.org/">checkinstall</a> could help you.
+It allows you to run any kind of comman <code>config + make</code> process, but instead of <code>make install</code> you&rsquo;d run
+<code>checkinstall -D</code></p>
+<p>That will call <code>make install</code> but track all files moved and create a .deb file for you.
+You can configure it to add metadata for you, but most of the time you&rsquo;d only set a package name and a version.</p>
+<p>The steps to use that are</p>
+<ul>
+<li>Prepare environment</li>
+</ul>
+<pre tabindex="0"><code>$ apt build-dep &lt;package&gt;
+$ git clone &lt;upstream project&gt;
+# common git bisect calls
+$ git bisect start &lt;bad&gt; &lt;good&gt;
+</code></pre><ul>
+<li>iterate with bisect/configure/make</li>
+</ul>
+<pre tabindex="0"><code>./configure &lt;options&gt;
+make -j
+</code></pre><ul>
+<li>checkinstall to get a .deb and test</li>
+</ul>
+<pre tabindex="0"><code>checkinstall -D
+# use the .deb it creates the way you need it and iterate
+</code></pre><p>That way I solved above challenges in multple cases, allowing me to find the offending upstream change on one hand using the upstream git <code>git-bisect</code>.
+While on the other hand using common Ubuntu .deb packages for clean install/upgrade of the versions I iterate on making distributing that to multiple systems quite easy.</p>
+<p>Also attaching such a deb to a bug report for a reporter to test - is much cleaner than a raw binary or a tarball.</p>
+<p>Hope that might help somebody else as well!</p>
+<p>References:</p>
+<ul>
+<li>Ubuntu Community on <a href="https://help.ubuntu.com/community/CheckInstall">checkinstall</a></li>
+<li>Debian Community on <a href="https://wiki.debian.org/CheckInstall">checkinstall</a></li>
+<li>Ubuntu man page of <a href="http://manpages.ubuntu.com/manpages/cosmic/man8/checkinstall.8.html">checkinstall</a></li>
+<li>an <a href="https://bugs.launchpad.net/ubuntu/+source/qemu/+bug/1783140/comments/32">example case</a> bisecting qemu that needed to be pushed on multiple systems to then run migration workload</li>
+</ul>
+</div>
+
+    
+    
+
+    
+
+    
+
+</main>
+
+        <footer>
+
+            <p class="copyright text-muted">© 2018-2020 Christian Ehrhardt - Powered by <a href="https://gohugo.io">Hugo</a> and <a href="https://github.com/calintat/minimal">Minimal</a></p>
+
+        </footer>
+       
+    </body>
+
+</html>
+

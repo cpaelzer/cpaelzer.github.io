@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on Pälzer</title>
+    <link>https://cpaelzer.github.io/tags/</link>
+    <description>Recent content in Tags on Pälzer</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 28 Apr 2024 12:08:27 +0200</lastBuildDate><atom:link href="https://cpaelzer.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>iommu</title>
+      <link>https://cpaelzer.github.io/tags/iommu/</link>
+      <pubDate>Sun, 28 Apr 2024 12:08:27 +0200</pubDate>
+      
+      <guid>https://cpaelzer.github.io/tags/iommu/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>passthrough</title>
+      <link>https://cpaelzer.github.io/tags/passthrough/</link>
+      <pubDate>Sun, 28 Apr 2024 12:08:27 +0200</pubDate>
+      
+      <guid>https://cpaelzer.github.io/tags/passthrough/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>qemu</title>
+      <link>https://cpaelzer.github.io/tags/qemu/</link>
+      <pubDate>Sun, 28 Apr 2024 12:08:27 +0200</pubDate>
+      
+      <guid>https://cpaelzer.github.io/tags/qemu/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>vfio</title>
+      <link>https://cpaelzer.github.io/tags/vfio/</link>
+      <pubDate>Sun, 28 Apr 2024 12:08:27 +0200</pubDate>
+      
+      <guid>https://cpaelzer.github.io/tags/vfio/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>performance</title>
+      <link>https://cpaelzer.github.io/tags/performance/</link>
+      <pubDate>Fri, 24 Mar 2023 11:55:27 +0200</pubDate>
+      
+      <guid>https://cpaelzer.github.io/tags/performance/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>post-quantum</title>
+      <link>https://cpaelzer.github.io/tags/post-quantum/</link>
+      <pubDate>Fri, 24 Mar 2023 11:55:27 +0200</pubDate>
+      
+      <guid>https://cpaelzer.github.io/tags/post-quantum/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>security</title>
+      <link>https://cpaelzer.github.io/tags/security/</link>
+      <pubDate>Fri, 24 Mar 2023 11:55:27 +0200</pubDate>
+      
+      <guid>https://cpaelzer.github.io/tags/security/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ssh</title>
+      <link>https://cpaelzer.github.io/tags/ssh/</link>
+      <pubDate>Fri, 24 Mar 2023 11:55:27 +0200</pubDate>
+      
+      <guid>https://cpaelzer.github.io/tags/ssh/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ubuntu</title>
+      <link>https://cpaelzer.github.io/tags/ubuntu/</link>
+      <pubDate>Fri, 24 Mar 2023 11:55:27 +0200</pubDate>
+      
+      <guid>https://cpaelzer.github.io/tags/ubuntu/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>bios</title>
+      <link>https://cpaelzer.github.io/tags/bios/</link>
+      <pubDate>Wed, 01 Jul 2020 12:08:27 +0200</pubDate>
+      
+      <guid>https://cpaelzer.github.io/tags/bios/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>kvm</title>
+      <link>https://cpaelzer.github.io/tags/kvm/</link>
+      <pubDate>Wed, 01 Jul 2020 12:08:27 +0200</pubDate>
+      
+      <guid>https://cpaelzer.github.io/tags/kvm/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>microvm</title>
+      <link>https://cpaelzer.github.io/tags/microvm/</link>
+      <pubDate>Wed, 01 Jul 2020 12:08:27 +0200</pubDate>
+      
+      <guid>https://cpaelzer.github.io/tags/microvm/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>libvirt</title>
+      <link>https://cpaelzer.github.io/tags/libvirt/</link>
+      <pubDate>Mon, 20 Jan 2020 12:08:27 +0200</pubDate>
+      
+      <guid>https://cpaelzer.github.io/tags/libvirt/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>version</title>
+      <link>https://cpaelzer.github.io/tags/version/</link>
+      <pubDate>Mon, 20 Jan 2020 12:08:27 +0200</pubDate>
+      
+      <guid>https://cpaelzer.github.io/tags/version/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>BBQ</title>
+      <link>https://cpaelzer.github.io/tags/bbq/</link>
+      <pubDate>Tue, 03 Sep 2019 13:51:26 +0100</pubDate>
+      
+      <guid>https://cpaelzer.github.io/tags/bbq/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>gas</title>
+      <link>https://cpaelzer.github.io/tags/gas/</link>
+      <pubDate>Tue, 03 Sep 2019 13:51:26 +0100</pubDate>
+      
+      <guid>https://cpaelzer.github.io/tags/gas/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>smoke</title>
+      <link>https://cpaelzer.github.io/tags/smoke/</link>
+      <pubDate>Tue, 03 Sep 2019 13:51:26 +0100</pubDate>
+      
+      <guid>https://cpaelzer.github.io/tags/smoke/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>pxe</title>
+      <link>https://cpaelzer.github.io/tags/pxe/</link>
+      <pubDate>Mon, 22 Oct 2018 06:14:29 +0200</pubDate>
+      
+      <guid>https://cpaelzer.github.io/tags/pxe/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>s390x</title>
+      <link>https://cpaelzer.github.io/tags/s390x/</link>
+      <pubDate>Mon, 22 Oct 2018 06:14:29 +0200</pubDate>
+      
+      <guid>https://cpaelzer.github.io/tags/s390x/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>bisect</title>
+      <link>https://cpaelzer.github.io/tags/bisect/</link>
+      <pubDate>Wed, 26 Sep 2018 16:14:29 +0200</pubDate>
+      
+      <guid>https://cpaelzer.github.io/tags/bisect/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>packaging</title>
+      <link>https://cpaelzer.github.io/tags/packaging/</link>
+      <pubDate>Wed, 26 Sep 2018 16:14:29 +0200</pubDate>
+      
+      <guid>https://cpaelzer.github.io/tags/packaging/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>migration</title>
+      <link>https://cpaelzer.github.io/tags/migration/</link>
+      <pubDate>Tue, 20 Feb 2018 13:51:46 +0100</pubDate>
+      
+      <guid>https://cpaelzer.github.io/tags/migration/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>option-roms</title>
+      <link>https://cpaelzer.github.io/tags/option-roms/</link>
+      <pubDate>Tue, 20 Feb 2018 13:51:46 +0100</pubDate>
+      
+      <guid>https://cpaelzer.github.io/tags/option-roms/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>virtio</title>
+      <link>https://cpaelzer.github.io/tags/virtio/</link>
+      <pubDate>Wed, 07 Feb 2018 12:51:26 +0100</pubDate>
+      
+      <guid>https://cpaelzer.github.io/tags/virtio/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

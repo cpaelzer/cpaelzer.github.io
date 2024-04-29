@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>pxe on Pälzer</title>
+    <link>https://cpaelzer.github.io/tags/pxe/</link>
+    <description>Recent content in pxe on Pälzer</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 22 Oct 2018 06:14:29 +0200</lastBuildDate><atom:link href="https://cpaelzer.github.io/tags/pxe/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>s390x KVM PXE on Ubuntu</title>
+      <link>https://cpaelzer.github.io/blogs/004-s390x-kvm-pxe-on-ubuntu/</link>
+      <pubDate>Mon, 22 Oct 2018 06:14:29 +0200</pubDate>
+      
+      <guid>https://cpaelzer.github.io/blogs/004-s390x-kvm-pxe-on-ubuntu/</guid>
+      <description>s390x KVM PXE on Ubuntu a.k.a behave like others just once Background on s390x PXE booting PXE booting is nothing new but so far to do so on s390x you had to jump quite a few extra hoops.
+On x86 you had the package pxelinux that would provide a full featured pxlinux to boot. You&amp;rsquo;d instruct a system to fetch this and it would implement all of the PXE Linux configuration from there.</description>
+    </item>
+    
+  </channel>
+</rss>

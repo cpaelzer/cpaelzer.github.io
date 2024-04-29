@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>packaging on Pälzer</title>
+    <link>https://cpaelzer.github.io/tags/packaging/</link>
+    <description>Recent content in packaging on Pälzer</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 26 Sep 2018 16:14:29 +0200</lastBuildDate><atom:link href="https://cpaelzer.github.io/tags/packaging/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Checkinstall as Bisect Helper</title>
+      <link>https://cpaelzer.github.io/blogs/003-checkinstall-as-bisect-helper/</link>
+      <pubDate>Wed, 26 Sep 2018 16:14:29 +0200</pubDate>
+      
+      <guid>https://cpaelzer.github.io/blogs/003-checkinstall-as-bisect-helper/</guid>
+      <description>Checkinstall as Bisect Helper a.k.a grml get those bisect bits where I want them Background on Bisecting If you try to hunt down a particular change that
+ introduced an issue to debug it that fixed an issue to backport it  then bisecting is one of the most common tools to get it done.
+And it generally works great as long as you can do a cycle like the following locally:</description>
+    </item>
+    
+  </channel>
+</rss>

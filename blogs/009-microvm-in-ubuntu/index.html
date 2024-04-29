@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+         
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Microvm, qboot and feature reduced qemu in Ubuntu</title>
+        <style>
+
+    html body {
+        font-family: 'Raleway', sans-serif;
+        background-color: white;
+    }
+
+    :root {
+        --accent: green;
+        --border-width:  5px ;
+    }
+
+</style>
+
+
+<link rel="stylesheet" href="https://cpaelzer.github.io//css/main.css">
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+
+
+ <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-dark.min.css"> 
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+ 
+
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/Bash.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/Diff.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/shell.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/C&#43;&#43;.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script> 
+
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+ <meta name="generator" content="Hugo 0.92.2" />
+        
+        
+        
+    </head>
+
+    
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+
+    <body>
+         
+        <nav class="navbar navbar-default navbar-fixed-top">
+
+            <div class="container">
+
+                <div class="navbar-header">
+
+                    <a class="navbar-brand visible-xs" href="#">Microvm, qboot and feature reduced qemu in Ubuntu</a>
+
+                    <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                </div>
+
+                <div class="collapse navbar-collapse">
+
+                    
+                        <ul class="nav navbar-nav">
+                            
+                                <li><a href="/blogs/">Tech</a></li>
+                            
+                                <li><a href="/bbq/">BBQ</a></li>
+                            
+                                <li><a href="/about">About</a></li>
+                            
+                                <li><a href="/public_gpg.txt">GPG Key</a></li>
+                            
+                        </ul>
+                    
+
+                    
+                        <ul class="nav navbar-nav navbar-right">
+                            
+                                <li class="navbar-icon"><a href="mailto:christian.ehrhardt@canonical.com"><i class="fa fa-envelope-o"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://github.com/cpaelzer/"><i class="fa fa-github"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://launchpad.net/~paelzer"><i class="fa fa-linux"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://stackoverflow.com/users/6361589/christian-ehrhardt"><i class="fa fa-stack-overflow"></i></a></li>
+                            
+                        </ul>
+                    
+
+                </div>
+
+            </div>
+
+        </nav>
+
+
+<main>
+
+    <div class="item">
+
+    
+    
+    
+
+    
+    
+
+    <h4><a href="/blogs/009-microvm-in-ubuntu/">Microvm, qboot and feature reduced qemu in Ubuntu</a></h4>
+    <h5>July 1, 2020</h5>
+    
+    <a href="https://cpaelzer.github.io/tags/kvm"><kbd class="item-tag">kvm</kbd></a>
+    
+    <a href="https://cpaelzer.github.io/tags/ubuntu"><kbd class="item-tag">Ubuntu</kbd></a>
+    
+    <a href="https://cpaelzer.github.io/tags/qemu"><kbd class="item-tag">qemu</kbd></a>
+    
+    <a href="https://cpaelzer.github.io/tags/microvm"><kbd class="item-tag">microvm</kbd></a>
+    
+    <a href="https://cpaelzer.github.io/tags/bios"><kbd class="item-tag">bios</kbd></a>
+    
+    <a href="https://cpaelzer.github.io/tags/performance"><kbd class="item-tag">performance</kbd></a>
+    
+
+</div>
+
+
+    <br> <div class="text-justify"><h1 id="microvm-qboot-and-feature-reduced-qemu-in-ubuntu">&ldquo;Microvm, qboot and feature reduced qemu in Ubuntu&rdquo;</h1>
+<h2 id="aka-throw-everything-over-board-we-need-to-get-faster">a.k.a Throw everything over board, we need to get faster</h2>
+<p>QEMU/KVM is a very powerful, complex and feature rich software stack for
+virtualization. But recently more and more people ask for virtualization style
+isolation (compared to containers), but at the same time want it to be as
+similar as possible to containers in terms of speedy initialization.</p>
+<p>For these use cases a generic QEMU sometimes is considered &ldquo;too fat&rdquo; and
+thereby ideas came up that a stripped-to-the-use-case QEMU most likely will be
+as fast as some emerging competitors while at the same time be already mature
+and compatible with a lot of other bits in the virtualization ecosystem.</p>
+<p>To make that available to Ubuntu users there now is an alternative executable
+for QEMU: <code>qemu-system-x86_64-microvm</code>.
+You can get that with:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ sudo apt install qemu-system-x86-microvm
+</code></pre></div><h1 id="inhibitors">Inhibitors</h1>
+<p>Let us break down what usually consumes time when starting a guest:</p>
+<ul>
+<li>code: finding, loading and mapping of dynamic libraries; many features to initialize and check config for</li>
+<li>virtual-machine: plenty of virtual hardware to prepare, present and initialize</li>
+<li>bios: initializing all the (virtual) hardware</li>
+<li>boot: guest detecting and loading the kernel/initrd</li>
+</ul>
+<p>The later coming virtio-fs will allow to make this even more container-like by
+providing a modern and efficient way to share file system content.</p>
+<p>Other than startup time (speed) there also can be less overhead due to the
+reduced virtual-HW (efficiency) and size. The latter comes in two ways, for
+memory/CPU footprint (guest density) as well as the active code base (smaller
+security relevant profile).</p>
+<p>In the following sections I&rsquo;ll outline what was done to speed up execution.</p>
+<h2 id="code-load">Code-load</h2>
+<p>Before a program can even influence it&rsquo;s execution time it has to start. And
+when starting your code doesn&rsquo;t run right away.
+Dynamic linked shared objects need to be loaded and mapped as well before you
+can start. If you want to optimize for the last few milliseconds you need to
+&ldquo;load less&rdquo; which maps to disabling unwanted features.
+This skips the loading, mapping as well as the initialization of these extra
+features.</p>
+<p>The features disabled in the <code>qemu-system-x86_64-microvm</code> binary are as
+recommended on the <a href="https://github.com/bonzini/qboot">qboot</a> page by QEMU
+maintainer Paolo Bonzini.</p>
+<h2 id="virtual-machine-startup">Virtual-machine startup</h2>
+<p>The common i440fx or q35 types try to resemble real computers. But there is
+no strict need for that.
+<a href="https://github.com/bonzini/qemu/blob/master/docs/microvm.rst">microvm</a> is a
+machine type inspired by <a href="https://firecracker-microvm.github.io/">firecracker</a>
+and constructed after its machine model - without PCI or ACPI, designed for
+short lived guests.</p>
+<p>That allows a minimalistic machine which reduces the amount of things the
+hypervisor has to set up and emulate. Thereby the initialization phase in the
+host gets faster, but also the guest kernel has less things to probe and
+enumerate when booting again saving startup time.</p>
+<h2 id="bios">Bios</h2>
+<p>Just like the hypervisor prepares all virtual hardware the firmware usually
+has to do a lot of enumeration, setup and initialization before the guest runs.
+But just like with the <code>microvm</code> type the usual bios ROM&rsquo;s are meant to behave
+like real computers.</p>
+<p>By adopting a restricted feature set to just boot Linux one can optimize this
+as well. <a href="https://github.com/bonzini/qboot">qboot</a> does that and is available
+as <code>/usr/share/qemu/bios-microvm.bin</code> provided by the package
+<code>qemu-system-data</code> since Ubuntu Focal.</p>
+<h2 id="boot">Boot</h2>
+<p>A lot of time in a boot process is usually consumed by reading and processing a
+myriad of bootloader specifications.
+Therefore almost all implementations for fast startup switch to an external
+kernel to load.
+After all this is inspired by container-like workloads which have no control
+of the kernel either.
+Providing the kernel/initrd is something QEMU already can do, but in these use
+cases it became the default way to run guests.</p>
+<h1 id="in-action">In Action</h1>
+<p>Overall you could call QEMU like this to get all of the above:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">$ sudo qemu-system-x86_64-microvm \                      # reduced binary
+  -M microvm \                                           # reduced machine type
+  -bios /usr/share/qemu/bios-microvm.bin \               # faster bios
+  -kernel /boot/vmlinuz-5.4.0-39-generic \               # no internal bootloader
+  -append &#34;earlyprintk=ttyS0 console=ttyS0,115200,8n1&#34; \
+  -enable-kvm -cpu host -m 1G -smp 1 -nodefaults -no-user-config \
+  -nographic -serial mon:stdio
+</code></pre></div><p>My past as a performance engineer tells me that I neither have the right
+hardware matrix nor the time to do a good performance evaluation of this.
+But also this is meant to be a 5 minute read blog post and not a 140 pages
+whitepaper. Therefore I beg you (and my old self) a pardon but I just couldn&rsquo;t
+find a scientific enough, but fast way to satisfy myself in this short time.
+I don&rsquo;t want to provide bad unreliable numbers to anyone - so no numbers today :-/</p>
+<h1 id="shared-fs">Shared-FS</h1>
+<p>Since this usally aligns on container use-cases shared-directory is a common
+pattern. To do so virtio-fs is available which has a server that can be spawned
+like (do not do this on the hot path of your load, or you have wasted plenty of
+time, have these ready beforehand):</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">/usr/lib/qemu/virtiofsd --socket-path=/tmp/myvhostqemu -o source=/tmp/testdir -o cache=always
+</code></pre></div><p>And on the VM you can connect to it via:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">... -chardev socket,id=char0,path=/tmp/myvhostqemu -device vhost-user-fs-device,queue-size=1024,chardev=char0,tag=myfs
+</code></pre></div><h1 id="drawbacks">Drawbacks</h1>
+<p>This new class of feature-focused hypervisors fills a gap between system
+containers and full hypervisors.
+But you have to be sure that this is the spot your application design
+needs/wants to be at.</p>
+<p>The huge gains are mostly due to dropping features not needed for these use
+cases. But if you end up then demanding pci-passthrough or migration support to
+name a few, you&rsquo;ll end up needing a full featured hypervisor again.</p>
+<h1 id="next-steps">Next steps</h1>
+<p>So many things carved off in the Host/initialization means that the guest
+content becomes even more important.
+Even with a non optimized QEMU/KVM binary and configuration the guest boot and
+initialization has consumed the majority of time.
+By reducing the time the hypervisor needs to initialize this the focus to
+further improve now is even more on the guest side.
+You might consider running software directly from an initrd or from an
+virtio-fs shared directory.
+Also consider doing so without a full init system right into the workload that
+matters to you (<em>matching non system-containers</em>).</p>
+<p>The line between classic hypervisors like QEMU/KVM and containers already got
+blurred by high quality system containers like
+<a href="https://linuxcontainers.org/lxd/introduction/">LXD</a>.
+These lines now get even more blurred, on one side with
+container-use-case-optimized hypervisors (which this blog is about) and on the
+other side containers starting to provide
+<a href="https://discuss.linuxcontainers.org/t/running-virtual-machines-with-lxd-4-0/7519">full virtualization</a>
+as transparent alternative.</p>
+</div>
+
+    
+    
+
+    
+
+    
+
+</main>
+
+        <footer>
+
+            <p class="copyright text-muted">© 2018-2020 Christian Ehrhardt - Powered by <a href="https://gohugo.io">Hugo</a> and <a href="https://github.com/calintat/minimal">Minimal</a></p>
+
+        </footer>
+       
+    </body>
+
+</html>
+

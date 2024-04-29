@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Blogs on Pälzer</title>
+    <link>https://cpaelzer.github.io/blogs/</link>
+    <description>Recent content in Blogs on Pälzer</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 28 Apr 2024 12:08:27 +0200</lastBuildDate><atom:link href="https://cpaelzer.github.io/blogs/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Slow VFIO guest startup</title>
+      <link>https://cpaelzer.github.io/blogs/007-vfio-slow-startup/</link>
+      <pubDate>Sun, 28 Apr 2024 12:08:27 +0200</pubDate>
+      
+      <guid>https://cpaelzer.github.io/blogs/007-vfio-slow-startup/</guid>
+      <description>Slow guest startup caused by using VFIO a.k.a being lost without a map(ing) Disclaimer: for now this is about the debugging where the time sink is, it mentions ways to mitigate some effects but not a fix. If later a fix comes up I&amp;rsquo;ll update.
+2024 Update To overcome this Qemu added and evolved pre-allocation quite a bit as you can often see in the &amp;ldquo;Memory backends&amp;rdquo; of the changelogs of 5.</description>
+    </item>
+    
+    <item>
+      <title>SSH login got slower, be happy!</title>
+      <link>https://cpaelzer.github.io/blogs/010-ssh-got-slower/</link>
+      <pubDate>Fri, 24 Mar 2023 11:55:27 +0200</pubDate>
+      
+      <guid>https://cpaelzer.github.io/blogs/010-ssh-got-slower/</guid>
+      <description>&amp;ldquo;SSH login got slower, be happy!&amp;rdquo; a.k.a.: a quantum slower against quantum attacks We regularly gather all kind of metrics to ensure Ubuntu is/stays/gets (depends on your POV) great. One of the metrics that I wanted to look at for way too long, but the change was too small to do so earlier was our check on non interactive ssh login speed.
+In that test we check how quickly you can log into ssh, do nothing and return which was a lessons learned from a bug years ago that it is better to watch for.</description>
+    </item>
+    
+    <item>
+      <title>Microvm, qboot and feature reduced qemu in Ubuntu</title>
+      <link>https://cpaelzer.github.io/blogs/009-microvm-in-ubuntu/</link>
+      <pubDate>Wed, 01 Jul 2020 12:08:27 +0200</pubDate>
+      
+      <guid>https://cpaelzer.github.io/blogs/009-microvm-in-ubuntu/</guid>
+      <description>&amp;ldquo;Microvm, qboot and feature reduced qemu in Ubuntu&amp;rdquo; a.k.a Throw everything over board, we need to get faster QEMU/KVM is a very powerful, complex and feature rich software stack for virtualization. But recently more and more people ask for virtualization style isolation (compared to containers), but at the same time want it to be as similar as possible to containers in terms of speedy initialization.
+For these use cases a generic QEMU sometimes is considered &amp;ldquo;too fat&amp;rdquo; and thereby ideas came up that a stripped-to-the-use-case QEMU most likely will be as fast as some emerging competitors while at the same time be already mature and compatible with a lot of other bits in the virtualization ecosystem.</description>
+    </item>
+    
+    <item>
+      <title>Ubuntu Virtualization Stack Crystal Ball</title>
+      <link>https://cpaelzer.github.io/blogs/008-virt-stack-crystal-ball/</link>
+      <pubDate>Mon, 20 Jan 2020 12:08:27 +0200</pubDate>
+      
+      <guid>https://cpaelzer.github.io/blogs/008-virt-stack-crystal-ball/</guid>
+      <description>Ubuntu Virtualization Stack Crystal Ball a.k.a which version of QEMU/libvirt will be in the next Ubuntu release? Background I am asked a lot of times in different contexts which version of QEMU, libvirt, or other components the next Ubutuntu release will contain. What this post will address how the upstreams manage versions and then how the Ubuntu project chooses a version to ship.
+Upstream First, consider how the two major upstreams of QEMU and libvirt handle versioning.</description>
+    </item>
+    
+    <item>
+      <title>Mediated Device GPU passthrough</title>
+      <link>https://cpaelzer.github.io/blogs/006-mediated-device-to-pass-parts-of-your-gpu-to-a-guest/</link>
+      <pubDate>Wed, 17 Apr 2019 12:08:27 +0200</pubDate>
+      
+      <guid>https://cpaelzer.github.io/blogs/006-mediated-device-to-pass-parts-of-your-gpu-to-a-guest/</guid>
+      <description>Mediated Device based GPU passthrough a.k.a passing part of a whole The many faces and names of vGPU Having GPU resources in the guest has various use cases. From a windows gaming VM to GPGPU assisted AI learning. Due to that there are many things people commonly call a &amp;ldquo;virtual Graphics Processing Unit&amp;rdquo; =&amp;gt; vGPU. Unfortunately it doesn&amp;rsquo;t help at all that many guides, forum posts and blogs call all of them vGPU.</description>
+    </item>
+    
+    <item>
+      <title>KVM Guests bigger than 1TiB</title>
+      <link>https://cpaelzer.github.io/blogs/005-guests-bigger-than-1tb/</link>
+      <pubDate>Wed, 17 Apr 2019 10:08:27 +0200</pubDate>
+      
+      <guid>https://cpaelzer.github.io/blogs/005-guests-bigger-than-1tb/</guid>
+      <description>KVM Guests bigger than 1TiB a.k.a size matters Background addressing memory More memory is almost always good, but to be able to use it it needs to be addressable as well. CPU&amp;rsquo;s are different and you can check yours how many bits are really supported.
+$ cat /proc/cpuinfo | grep &amp;#39;^address sizes&amp;#39; ... # an older server with a E5-2620 address sizes : 46 bits physical, 48 bits virtual # a laptop with an i7-8550U address sizes : 39 bits physical, 48 bits virtual And ignoring all other constraints, to address 1TiB you&amp;rsquo;ll need 40 bits, so if you want to have more than 1TiB of guest memory it needs more than 40 bits to address it.</description>
+    </item>
+    
+    <item>
+      <title>s390x KVM PXE on Ubuntu</title>
+      <link>https://cpaelzer.github.io/blogs/004-s390x-kvm-pxe-on-ubuntu/</link>
+      <pubDate>Mon, 22 Oct 2018 06:14:29 +0200</pubDate>
+      
+      <guid>https://cpaelzer.github.io/blogs/004-s390x-kvm-pxe-on-ubuntu/</guid>
+      <description>s390x KVM PXE on Ubuntu a.k.a behave like others just once Background on s390x PXE booting PXE booting is nothing new but so far to do so on s390x you had to jump quite a few extra hoops.
+On x86 you had the package pxelinux that would provide a full featured pxlinux to boot. You&amp;rsquo;d instruct a system to fetch this and it would implement all of the PXE Linux configuration from there.</description>
+    </item>
+    
+    <item>
+      <title>Checkinstall as Bisect Helper</title>
+      <link>https://cpaelzer.github.io/blogs/003-checkinstall-as-bisect-helper/</link>
+      <pubDate>Wed, 26 Sep 2018 16:14:29 +0200</pubDate>
+      
+      <guid>https://cpaelzer.github.io/blogs/003-checkinstall-as-bisect-helper/</guid>
+      <description>Checkinstall as Bisect Helper a.k.a grml get those bisect bits where I want them Background on Bisecting If you try to hunt down a particular change that
+ introduced an issue to debug it that fixed an issue to backport it  then bisecting is one of the most common tools to get it done.
+And it generally works great as long as you can do a cycle like the following locally:</description>
+    </item>
+    
+    <item>
+      <title>Live Migration with changing ROM sizes</title>
+      <link>https://cpaelzer.github.io/blogs/002-migration-with-changed-roms/</link>
+      <pubDate>Tue, 20 Feb 2018 13:51:46 +0100</pubDate>
+      
+      <guid>https://cpaelzer.github.io/blogs/002-migration-with-changed-roms/</guid>
+      <description>Live Migration with changing Rom sizes a.k.a size matters Background on QEMU ROM Virtual PCI devices have Option ROM support just like physical PIC device. Option ROMs for PCI devices have been used to enable additional functionality, such as PXE Boot. The size of these is implied by the PCI spec to be a power of two. In QEMU the size allocated for such a rom is defined by the size of the file backing up the rom.</description>
+    </item>
+    
+    <item>
+      <title>query and control virtio version</title>
+      <link>https://cpaelzer.github.io/blogs/001-qemu-libvirt-virtio-version/</link>
+      <pubDate>Wed, 07 Feb 2018 12:51:26 +0100</pubDate>
+      
+      <guid>https://cpaelzer.github.io/blogs/001-qemu-libvirt-virtio-version/</guid>
+      <description>virtio: modern/legacy = ??? a.k.a puzzlement about inquiring or controlling virtio revisions via libvirt When looking around how to check for the current setting of modern/legacy virtio, or how to control it via libvirt I only found dead ends at first.
+ If you search how to get some info about it you will find query-virtio/info virtio, but after 5 versions being discussed nothing is merged still. If instead you search how to better control the version you&amp;rsquo;ll find virtio revision, but also 5 versions discussed until declared postponed.</description>
+    </item>
+    
+  </channel>
+</rss>

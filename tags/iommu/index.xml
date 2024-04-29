@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>iommu on Pälzer</title>
+    <link>https://cpaelzer.github.io/tags/iommu/</link>
+    <description>Recent content in iommu on Pälzer</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 28 Apr 2024 12:08:27 +0200</lastBuildDate><atom:link href="https://cpaelzer.github.io/tags/iommu/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Slow VFIO guest startup</title>
+      <link>https://cpaelzer.github.io/blogs/007-vfio-slow-startup/</link>
+      <pubDate>Sun, 28 Apr 2024 12:08:27 +0200</pubDate>
+      
+      <guid>https://cpaelzer.github.io/blogs/007-vfio-slow-startup/</guid>
+      <description>Slow guest startup caused by using VFIO a.k.a being lost without a map(ing) Disclaimer: for now this is about the debugging where the time sink is, it mentions ways to mitigate some effects but not a fix. If later a fix comes up I&amp;rsquo;ll update.
+2024 Update To overcome this Qemu added and evolved pre-allocation quite a bit as you can often see in the &amp;ldquo;Memory backends&amp;rdquo; of the changelogs of 5.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+         
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Mediated Device GPU passthrough</title>
+        <style>
+
+    html body {
+        font-family: 'Raleway', sans-serif;
+        background-color: white;
+    }
+
+    :root {
+        --accent: green;
+        --border-width:  5px ;
+    }
+
+</style>
+
+
+<link rel="stylesheet" href="https://cpaelzer.github.io//css/main.css">
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+
+
+ <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-dark.min.css"> 
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+ 
+
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/Bash.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/Diff.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/shell.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/C&#43;&#43;.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script> 
+
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+ <meta name="generator" content="Hugo 0.92.2" />
+        
+        
+        
+    </head>
+
+    
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+
+    <body>
+         
+        <nav class="navbar navbar-default navbar-fixed-top">
+
+            <div class="container">
+
+                <div class="navbar-header">
+
+                    <a class="navbar-brand visible-xs" href="#">Mediated Device GPU passthrough</a>
+
+                    <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                </div>
+
+                <div class="collapse navbar-collapse">
+
+                    
+                        <ul class="nav navbar-nav">
+                            
+                                <li><a href="/blogs/">Tech</a></li>
+                            
+                                <li><a href="/bbq/">BBQ</a></li>
+                            
+                                <li><a href="/about">About</a></li>
+                            
+                                <li><a href="/public_gpg.txt">GPG Key</a></li>
+                            
+                        </ul>
+                    
+
+                    
+                        <ul class="nav navbar-nav navbar-right">
+                            
+                                <li class="navbar-icon"><a href="mailto:christian.ehrhardt@canonical.com"><i class="fa fa-envelope-o"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://github.com/cpaelzer/"><i class="fa fa-github"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://launchpad.net/~paelzer"><i class="fa fa-linux"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://stackoverflow.com/users/6361589/christian-ehrhardt"><i class="fa fa-stack-overflow"></i></a></li>
+                            
+                        </ul>
+                    
+
+                </div>
+
+            </div>
+
+        </nav>
+
+
+<main>
+
+    <div class="item">
+
+    
+    
+    
+
+    
+    
+
+    <h4><a href="/blogs/006-mediated-device-to-pass-parts-of-your-gpu-to-a-guest/">Mediated Device GPU passthrough</a></h4>
+    <h5>April 17, 2019</h5>
+    
+    <a href="https://cpaelzer.github.io/tags/libvirt"><kbd class="item-tag">libvirt</kbd></a>
+    
+    <a href="https://cpaelzer.github.io/tags/qemu"><kbd class="item-tag">qemu</kbd></a>
+    
+    <a href="https://cpaelzer.github.io/tags/passthrough"><kbd class="item-tag">passthrough</kbd></a>
+    
+
+</div>
+
+
+    <br> <div class="text-justify"><h1 id="mediated-device-based-gpu-passthrough">Mediated Device based GPU passthrough</h1>
+<h2 id="aka-passing-part-of-a-whole">a.k.a passing part of a whole</h2>
+<h3 id="the-many-faces-and-names-of-vgpu">The many faces and names of vGPU</h3>
+<p>Having GPU resources in the guest has various use cases. From a windows gaming VM to GPGPU assisted AI learning.
+Due to that there are many things people commonly call a &ldquo;virtual Graphics Processing Unit&rdquo; =&gt; <code>vGPU</code>.
+Unfortunately it doesn&rsquo;t help at all that many guides, forum posts and blogs call all of them vGPU.
+Also PCI-passthrough has many facets e.g. using VFIO and virtual-functions or not.</p>
+<p>Up until recently we have had three types to make GPU somehow power available in a guest.</p>
+<p><a href="https://www.ibm.com/developerworks/linux/library/l-pci-passthrough/">PCI-passthrough</a> =&gt; Usually used for GPGPU (but could be almost any PCI device)</p>
+<ul>
+<li>
+<ul>
+<li>Uses <em>normal</em> guest driver</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>Needs not really support by the Device</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>1:1 Device-Guest mapping</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>Needs IOMMU / VT-d</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>Not migratable</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>IOMMU group restrictions</li>
+</ul>
+</li>
+</ul>
+<p><a href="https://wiki.libvirt.org/page/Networking#PCI_Passthrough_of_host_network_devices">VF-Passthrough</a> =&gt; Usually used for Network</p>
+<ul>
+<li>
+<ul>
+<li>Uses <em>normal</em> driver</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>1:N Device-Guest mapping</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>Needs FW&amp;Driver to create VFs</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>Needs IOMMU / VT-d</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>Not migratable</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>IOMMU groups restrictions</li>
+</ul>
+</li>
+</ul>
+<p><a href="https://virgil3d.github.io/">VirtGL</a> =&gt; some 3D in guest without passthrough</p>
+<ul>
+<li>
+<ul>
+<li>1:N Device-Guest mapping</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>Needs no IOMMU / VT-d</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>Guest needs VirtGL driver</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>Not migratable</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>only for rendering</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>not as fast as device passthrough</li>
+</ul>
+</li>
+</ul>
+<p>Now there is another contender in the vGPU arena - <a href="https://www.kernel.org/doc/Documentation/vfio-mediated-device.txt">mediated devices</a></p>
+<ul>
+<li>
+<ul>
+<li>1:N Device-Guest mapping</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>Needs no IOMMU / VT-d</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>Uses <em>normal</em> driver</li>
+</ul>
+</li>
+<li>/ Migratable (future)</li>
+<li>
+<ul>
+<li>Needs Driver to create MDEVs</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>Needs IOMMU / VT-d</li>
+</ul>
+</li>
+</ul>
+<p>If you compare the four of them from 10.000 feet they differentiate at the level where they are &ldquo;split&rdquo;</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">|                 | HW  | Firmware  | Kernel/Driver | Userspace    | Guest |
+| PCI-passthrough | 1:1 | --------- | ------------- | ------------ | --x   |
+| VF-Passthrough  |     | split VFs | ------------- | ------------ | --x   |
+| Mediated Device |     |           |  split MDEVs  | ------------ | --x   |
+| VirtGL          |     |           |               | VirtGL split | --x   |
+</code></pre></div><h3 id="choose-your-ubuntu-release">Choose your Ubuntu release</h3>
+<p>To a different extend mediated devices were usable before (since 18.04 Bionic Beaver) already.
+But in Ubuntu 19.04 (<a href="https://wiki.ubuntu.com/DiscoDingo/ReleaseNotes#qemu">Disco Dingo</a>) many things finally come together:</p>
+<ul>
+<li>automatic apparmor rules for GL devices</li>
+<li>automatic apparmor rules for Mediated Devices</li>
+<li>Kernel bits for i915 (&gt;=4.17)</li>
+<li>Kernel bits for Nvidia (&gt;=4.15)</li>
+<li>Enablement of GL support in qemu</li>
+<li>Many minor fixes in kernel, qemu and libvirt for this use case in 19.04</li>
+</ul>
+<p>Not needed for mediated devices, but also often requested VirtGL finally is enabled in the virtualization stack of Ubuntu 19.04</p>
+<p>For those that want to stick to the latest LTS release even for such experiments there is a way out using:</p>
+<ul>
+<li><a href="https://wiki.ubuntu.com/Kernel/LTSEnablementStack">HWE Kernel</a> with kernel 5.0 from Disco</li>
+<li><a href="https://wiki.ubuntu.com/OpenStack/CloudArchive">Ubuntu Cloud Archive</a> with qemu 3.1 and libvirt 5.0 from Disco</li>
+</ul>
+<h3 id="prepare-the-mediated-device">Prepare the Mediated Device</h3>
+<p>This example uses the Intel i915 GPU that is less powerful but much more widely available than the high profile <a href="https://docs.nvidia.com/grid/latest/grid-vgpu-release-notes-red-hat-el-kvm/index.html">Nvidia cards</a> supporting mediated devices.
+First of all you need:</p>
+<ul>
+<li>load VFIO modules on boot</li>
+<li>enable IOMMU</li>
+<li>enable GVT mode for i915 driver</li>
+</ul>
+<p>If you follow the references in the last section you&rsquo;ll find that it seems these days every hardware needs at least some different quirks still.
+The ones used and listed here are those I needed.</p>
+<ul>
+<li>set <code>drm.debug=0</code></li>
+<li>set <code>intel_iommu=igfx_off</code> (<a href="https://bugs.freedesktop.org/show_bug.cgi?id=110238">bug in my HW</a>)</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ printf <span style="color:#e6db74">&#34;kvmgt\nvfio-iommu-type1\nvfio-mdev&#34;</span> | sudo tee /etc/initramfs-tools/modules
+$ printf <span style="color:#e6db74">&#34;i915.enable_gvt=1&#34;</span> | sudo tee /etc/modprobe.d/i915.conf
+$ sed -e <span style="color:#e6db74">&#39;s/^GRUB_CMDLINE_LINUX_DEFAULT=&#34;/&amp;intel_iommu=on drm.debug=0 intel_iommu=igfx_off /&#39;</span> /etc/default/grub
+$ sudo update-initramfs -u
+$ sudo update-grub
+</code></pre></div><p>After reboot your IOMMU should be up and running</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ dmesg | grep -i -e iommu -e i915 -e gvt                                                          
+...
+<span style="color:#f92672">[</span>    0.108458<span style="color:#f92672">]</span> DMAR: IOMMU enabled
+<span style="color:#f92672">[</span>    0.173256<span style="color:#f92672">]</span> DMAR-IR: IOAPIC id <span style="color:#ae81ff">2</span> under DRHD base  0xfed91000 IOMMU <span style="color:#ae81ff">1</span>
+<span style="color:#f92672">[</span>    0.883736<span style="color:#f92672">]</span> iommu: Adding device 0000:00:00.0 to group <span style="color:#ae81ff">0</span>
+...
+<span style="color:#f92672">[</span>   11.758688<span style="color:#f92672">]</span> i915 0000:00:02.0: MDEV: Registered
+</code></pre></div><p>The next thing you need to do is to actually <em>carve out</em> a mediated device from your real GPU.
+On the i915 card that is done via sysfs.
+You want to:</p>
+<ul>
+<li>check which PCI ID your GPU has</li>
+<li>create a new UUID to use</li>
+<li>register a new mediated device</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ lspci -v | grep -i vga
+00:02.0 VGA compatible controller: Intel Corporation HD Graphics <span style="color:#ae81ff">6000</span>
+        <span style="color:#f92672">(</span>rev 09<span style="color:#f92672">)</span> <span style="color:#f92672">(</span>prog-if <span style="color:#ae81ff">00</span> <span style="color:#f92672">[</span>VGA controller<span style="color:#f92672">])</span>
+
+<span style="color:#75715e"># on 02 we can then see supported types</span>
+$ ll /sys/bus/pci/devices/0000:00:02.0/mdev_supported_types
+drwxr-xr-x  <span style="color:#ae81ff">3</span> root root <span style="color:#ae81ff">0</span> Apr <span style="color:#ae81ff">17</span> 15:07 i915-GVTg_V4_4/
+drwxr-xr-x  <span style="color:#ae81ff">3</span> root root <span style="color:#ae81ff">0</span> Apr <span style="color:#ae81ff">17</span> 15:07 i915-GVTg_V4_8/
+
+<span style="color:#75715e"># register a new one</span>
+$ uuid
+4dd50f26-ec08-11e8-b838-4bc3356865b6
+$ cd /sys/bus/pci/devices/0000:00:02.0/mdev_supported_types/i915-GVTg_V4_4
+$ echo 4dd50f26-ec08-11e8-b838-4bc3356865b6 | sudo tee create
+
+<span style="color:#75715e"># check the new device exists</span>
+ll /sys/bus/mdev/devices/4dd50f26-ec08-11e8-b838-4bc3356865b6
+lrwxrwxrwx <span style="color:#ae81ff">1</span> root root <span style="color:#ae81ff">0</span> Apr <span style="color:#ae81ff">17</span> 15:08
+  /sys/bus/mdev/devices/4dd50f26-ec08-11e8-b838-4bc3356865b6 -&gt;
+  ../../../devices/pci0000:00/0000:00:02.0/4dd50f26-ec08-11e8-b838-4bc3356865b6/
+</code></pre></div><h3 id="pass-the-mediated-device-to-the-guest">Pass the Mediated Device to the guest</h3>
+<p>Eventually it is qemu that will do this job and in qemu command line that would look like:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">...
+-nodefaults
+-M graphics<span style="color:#f92672">=</span>off
+-display gtk,gl<span style="color:#f92672">=</span>on
+-device vfio-pci,sysfsdev<span style="color:#f92672">=</span>/sys/bus/pci/devices/0000:00:02.0/4dd511f6-ec08-11e8-b839-2f163ddee3b3,display<span style="color:#f92672">=</span>on,rombar<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>
+...
+</code></pre></div><p><a href="https://www.kraxel.org/blog/2018/04/vgpu-display-support-finally-merged-upstream/">Kraxels blog</a> explains the reason for each of those nicely, no need to repeat that.</p>
+<p>But only a few people really prefer qemu command line, instead let use use libvirt to pass this device.
+And in addition I wanted to have it run by libvirt to benefit from the <a href="https://wiki.ubuntu.com/DiscoDingo/ReleaseNotes#libvirt">apparmor profile support that got added for GL and MDEV features</a>.
+Use whatever tool you like, I usually edit directly in <code>virsh</code>, but you could most likely could change the same in <code>virt-manager</code>.
+Essentially what you need to do is:</p>
+<ul>
+<li>enable GL on a spice graphic</li>
+<li>disable listening (incompatible with GL)</li>
+<li>add the mediated device as hostdev</li>
+</ul>
+<p>In libvirt XML for my example that looks like:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;graphics</span> <span style="color:#a6e22e">type=</span><span style="color:#e6db74">&#39;spice&#39;</span><span style="color:#f92672">&gt;</span>
+  <span style="color:#f92672">&lt;listen</span> <span style="color:#a6e22e">type=</span><span style="color:#e6db74">&#39;none&#39;</span><span style="color:#f92672">/&gt;</span>
+  <span style="color:#f92672">&lt;gl</span> <span style="color:#a6e22e">enable=</span><span style="color:#e6db74">&#39;yes&#39;</span><span style="color:#f92672">/&gt;</span>
+<span style="color:#f92672">&lt;/graphics&gt;</span>
+<span style="color:#f92672">&lt;hostdev</span> <span style="color:#a6e22e">mode=</span><span style="color:#e6db74">&#39;subsystem&#39;</span> <span style="color:#a6e22e">type=</span><span style="color:#e6db74">&#39;mdev&#39;</span> <span style="color:#a6e22e">managed=</span><span style="color:#e6db74">&#39;no&#39;</span> <span style="color:#a6e22e">model=</span><span style="color:#e6db74">&#39;vfio-pci&#39;</span><span style="color:#f92672">&gt;</span>
+  <span style="color:#f92672">&lt;source&gt;</span>
+    <span style="color:#f92672">&lt;address</span> <span style="color:#a6e22e">uuid=</span><span style="color:#e6db74">&#39;4dd50f26-ec08-11e8-b838-4bc3356865b6&#39;</span><span style="color:#f92672">/&gt;</span>
+  <span style="color:#f92672">&lt;/source&gt;</span>
+<span style="color:#f92672">&lt;/hostdev&gt;</span>
+</code></pre></div><h3 id="use-the-gpu-in-the-guest">Use the GPU in the guest</h3>
+<p>Other than a full PCI passthrough of a GPU the hosts - where the guest will output graphics on the external ports - my Host still runs all it&rsquo;s UI on the HDMI out of the graphics card we just passed to the guest.
+I have not yet had the pleasure to use actual Graphics on those devices in the guest (needs to be arbitrated, but I have yet to do so - maybe one can assign ports one day).</p>
+<p>But they can already be used to run some accelerated open-CL load which is much more interesting to me anyway.
+First of all take a look at the card in the guest, it is a <em>normal</em> PCI device.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ lspci -s <span style="color:#ae81ff">07</span>
+00:07.0 VGA compatible controller: Intel Corporation HD Graphics <span style="color:#ae81ff">6000</span> <span style="color:#f92672">(</span>rev 09<span style="color:#f92672">)</span>
+</code></pre></div><p>Using beignet for i915 open-CL shows the card as supported</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ sudo apt install beignet
+$ clinfo
+Number of platforms                               <span style="color:#ae81ff">1</span>
+  Platform Name                                   Intel Gen OCL Driver
+  Platform Vendor                                 Intel
+  Platform Version                                OpenCL 2.0 beignet 1.3
+  Platform Profile                                FULL_PROFILE
+  Platform Extensions                             cl_khr_global_int32_base_atomics cl_khr_global_int32_extended_atomics cl_khr_local_int32_base_atomics cl_khr_local_int32_extended_atomics cl_khr_byte_addressable_store cl_khr_3d_image_writes cl_khr_image2d_from_buffer cl_khr_depth_images cl_khr_spir cl_khr_icd cl_intel_accelerator cl_intel_subgroups cl_intel_subgroups_short cl_khr_gl_sharing
+  Platform Extensions <span style="color:#66d9ef">function</span> suffix             Intel
+...
+Number of devices                                 <span style="color:#ae81ff">1</span>
+  Device Name                                     Intel<span style="color:#f92672">(</span>R<span style="color:#f92672">)</span> HD Graphics <span style="color:#ae81ff">6000</span> BroadWell U-Processor GT3
+...
+</code></pre></div><p>And for the sake of a trivial (read non full AI stack) test program you might look at <a href="https://github.com/jcupitt/opencl-experiments/blob/master/README.md">jcupitt</a>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ sudo apt install beignet-dev
+$ wget https://codeload.github.com/hpc12/tools/tar.gz/master
+$ tar xvf master
+$ cd tools-master/
+$ make
+
+$ ./cl-demo <span style="color:#ae81ff">1000000</span> <span style="color:#ae81ff">1000</span>
+NAME: Intel<span style="color:#f92672">(</span>R<span style="color:#f92672">)</span> HD Graphics <span style="color:#ae81ff">6000</span> BroadWell U-Processor GT3
+...
+VERSION: OpenCL 1.2 beignet 1.3
+EXTENSIONS: cl_khr_global_int32_base_atomics cl_khr_global_int32_extended_atomics cl_khr_local_int32_base_atomics cl_khr_local_int32_extended_atomics cl_khr_byte_addressable_store cl_khr_3d_image_writes cl_khr_image2d_from_buffer cl_khr_depth_images cl_khr_spir cl_khr_icd cl_intel_accelerator cl_intel_subgroups cl_intel_subgroups_short cl_khr_gl_sharing cl_khr_fp16
+...
+---------------------------------------------------------------------
+0.001428 s
+8.404181 GB/s
+GOOD
+</code></pre></div><p>I&rsquo;m sure with better GPUs and real use cases that can be very helpful.
+Especially since there are no Virtual Functions for GPUs that I&rsquo;d know of that finally provides a 1:N relation for GPU passthrough.</p>
+<p>More on that topic next time when I got hold of more powerful devices.
+Until then I really like that my 4 year old NUC with integrated graphics already allowed me to experiment on <code>mediated devices</code></p>
+<h3 id="outlook-and-next-steps">Outlook and next steps</h3>
+<p>If you watch the mailing lists you will see that there are more types of mediated devices discussed, I&rsquo;m sure more of them are coming.
+Even very different things like <a href="https://patchwork.kernel.org/cover/10634859/">s390x vfio-ap</a> was implemented using mediated devices.
+It is exiting to see what other devices and what mdev features will be added next - <a href="https://events.linuxfoundation.org/wp-content/uploads/2017/12/Hardware-Assisted-Mediated-Pass-Through-with-VFIO-Kevin-Tian-Intel.pdf">mdev+vfio</a> or <a href="https://events.linuxfoundation.org/wp-content/uploads/2017/12/Cunming-Liang-Intel-KVM-Forum-2018-VDPA-VHOST-MDEV.pdf">vhost-mdev</a>, who knows?</p>
+<h3 id="further-references">Further References:</h3>
+<ul>
+<li><a href="https://www.kraxel.org/blog/2018/04/vgpu-display-support-finally-merged-upstream/">Kraxels blog when the feature hit upstream</a> (great and brief reference)</li>
+<li><a href="https://github.com/intel/gvt-linux/wiki/GVTg_Setup_Guide">Intel GVT setup</a></li>
+<li><a href="https://www.kernel.org/doc/Documentation/vfio-mediated-device.txt">Kernel vfio mdev doc</a></li>
+<li><a href="https://www.linux-kvm.org/images/5/59/02x03-Neo_Jia_and_Kirti_Wankhede-vGPU_on_KVM-A_VFIO_based_Framework.pdf">vGPU intro Slide deck</a></li>
+<li>early Docs on <a href="https://www.infradead.org/~mchehab/kernel_docs/unsorted/vfio-mediated-device.html">mediated devices</a></li>
+<li><a href="https://docs.nvidia.com/grid/latest/grid-vgpu-release-notes-red-hat-el-kvm/index.html">Nvidia documentation</a></li>
+</ul>
+</div>
+
+    
+    
+
+    
+
+    
+
+</main>
+
+        <footer>
+
+            <p class="copyright text-muted">© 2018-2020 Christian Ehrhardt - Powered by <a href="https://gohugo.io">Hugo</a> and <a href="https://github.com/calintat/minimal">Minimal</a></p>
+
+        </footer>
+       
+    </body>
+
+</html>
+

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>version on Pälzer</title>
+    <link>https://cpaelzer.github.io/tags/version/</link>
+    <description>Recent content in version on Pälzer</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 20 Jan 2020 12:08:27 +0200</lastBuildDate><atom:link href="https://cpaelzer.github.io/tags/version/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Ubuntu Virtualization Stack Crystal Ball</title>
+      <link>https://cpaelzer.github.io/blogs/008-virt-stack-crystal-ball/</link>
+      <pubDate>Mon, 20 Jan 2020 12:08:27 +0200</pubDate>
+      
+      <guid>https://cpaelzer.github.io/blogs/008-virt-stack-crystal-ball/</guid>
+      <description>Ubuntu Virtualization Stack Crystal Ball a.k.a which version of QEMU/libvirt will be in the next Ubuntu release? Background I am asked a lot of times in different contexts which version of QEMU, libvirt, or other components the next Ubutuntu release will contain. What this post will address how the upstreams manage versions and then how the Ubuntu project chooses a version to ship.
+Upstream First, consider how the two major upstreams of QEMU and libvirt handle versioning.</description>
+    </item>
+    
+  </channel>
+</rss>

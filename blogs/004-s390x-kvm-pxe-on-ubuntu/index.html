@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+         
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>s390x KVM PXE on Ubuntu</title>
+        <style>
+
+    html body {
+        font-family: 'Raleway', sans-serif;
+        background-color: white;
+    }
+
+    :root {
+        --accent: green;
+        --border-width:  5px ;
+    }
+
+</style>
+
+
+<link rel="stylesheet" href="https://cpaelzer.github.io//css/main.css">
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+
+
+ <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-dark.min.css"> 
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+ 
+
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/Bash.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/Diff.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/shell.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/C&#43;&#43;.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script> 
+
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+ <meta name="generator" content="Hugo 0.92.2" />
+        
+        
+        
+    </head>
+
+    
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+
+    <body>
+         
+        <nav class="navbar navbar-default navbar-fixed-top">
+
+            <div class="container">
+
+                <div class="navbar-header">
+
+                    <a class="navbar-brand visible-xs" href="#">s390x KVM PXE on Ubuntu</a>
+
+                    <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                </div>
+
+                <div class="collapse navbar-collapse">
+
+                    
+                        <ul class="nav navbar-nav">
+                            
+                                <li><a href="/blogs/">Tech</a></li>
+                            
+                                <li><a href="/bbq/">BBQ</a></li>
+                            
+                                <li><a href="/about">About</a></li>
+                            
+                                <li><a href="/public_gpg.txt">GPG Key</a></li>
+                            
+                        </ul>
+                    
+
+                    
+                        <ul class="nav navbar-nav navbar-right">
+                            
+                                <li class="navbar-icon"><a href="mailto:christian.ehrhardt@canonical.com"><i class="fa fa-envelope-o"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://github.com/cpaelzer/"><i class="fa fa-github"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://launchpad.net/~paelzer"><i class="fa fa-linux"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://stackoverflow.com/users/6361589/christian-ehrhardt"><i class="fa fa-stack-overflow"></i></a></li>
+                            
+                        </ul>
+                    
+
+                </div>
+
+            </div>
+
+        </nav>
+
+
+<main>
+
+    <div class="item">
+
+    
+    
+    
+
+    
+    
+
+    <h4><a href="/blogs/004-s390x-kvm-pxe-on-ubuntu/">s390x KVM PXE on Ubuntu</a></h4>
+    <h5>October 22, 2018</h5>
+    
+    <a href="https://cpaelzer.github.io/tags/s390x"><kbd class="item-tag">s390x</kbd></a>
+    
+    <a href="https://cpaelzer.github.io/tags/pxe"><kbd class="item-tag">pxe</kbd></a>
+    
+    <a href="https://cpaelzer.github.io/tags/qemu"><kbd class="item-tag">qemu</kbd></a>
+    
+
+</div>
+
+
+    <br> <div class="text-justify"><h1 id="s390x-kvm-pxe-on-ubuntu">s390x KVM PXE on Ubuntu</h1>
+<h2 id="aka-behave-like-others-just-once">a.k.a behave like others just once</h2>
+<h3 id="background-on-s390x-pxe-booting">Background on s390x PXE booting</h3>
+<p><a href="https://www.syslinux.org/wiki/index.php?title=PXELINUX">PXE booting</a> is nothing
+new but so far to do so on s390x you had to jump quite a few <a href="http://ubuntu-on-big-iron.blogspot.com/2017/12/pxe-netboot-kvm-s390x.html">extra hoops</a>.</p>
+<p>On x86 you had the package <code>pxelinux</code> that would provide a full featured pxlinux to boot.
+You&rsquo;d instruct a system to fetch this and it would implement all of the <a href="https://www.syslinux.org/wiki/index.php?title=PXELINUX#Configuration">PXE Linux configuration</a>
+from there.</p>
+<p>But being x86 code that would not have worked on s390x. Due to that there initially was a way to <a href="https://github.com/ibm-s390-tools/s390-tools/tree/master/netboot">create your own
+initial blob</a>
+that would consist of a kernel, an initrd and scripts to implement the very basics of PXE.
+But not only did that miss extended PXE features, it also had a kernel/initrd bundled.
+If you wanted to use it for something else you&rsquo;d have to regenerate that blob.
+And in general users/admins were required to create such a blob for themselves.</p>
+<p><a href="https://www.ubuntu.com/download/server/power">PPC64LE</a> instead had all the PXE
+features implemented via it&rsquo;s bios called <a href="https://github.com/aik/SLOF/">SLOF</a>.</p>
+<p>In an effort to get more PXE features to s390x they reused some of that code and
+also bundled it with their ROM. This is actually part of <a href="https://wiki.qemu.org/ChangeLog/3.0#s390_firmware">qemu 3.0</a>
+but to make it more usable for users and automation software it was
+<a href="https://wiki.ubuntu.com/StableReleaseUpdates">SRU&rsquo;ed</a>
+to <a href="https://bugs.launchpad.net/ubuntu/+source/qemu/+bug/1790901">Bionic and Cosmic</a>.
+Due to that it is available on the last <a href="https://wiki.ubuntu.com/LTS">Ubuntu LTS</a>
+starting with qemu version <code>1:2.11+dfsg-1ubuntu7.7</code></p>
+<p>On one hand that lets you skip most of the <a href="http://ubuntu-on-big-iron.blogspot.com/2017/12/pxe-netboot-kvm-s390x.html">steps</a>
+that were required before and on the other hand you will gain more PXE
+configuration features being supported.</p>
+<h3 id="step-i---prepare-netboot-resources">Step I - prepare netboot resources</h3>
+<p>There are plenty of ways to <a href="https://wiki.ubuntu.com/S390X#Installation">install on s390x</a>.
+All of them usually seem odd to non System z people.
+So lets add PXE based install into KVM as something that looks more familiar.</p>
+<p>There is already a <a href="http://ports.ubuntu.com/ubuntu-ports/dists/bionic/main/installer-s390x/current/images/generic/">s390x d-i image</a>
+that can be used on <a href="https://wiki.ubuntu.com/S390X/Installation%20In%20LPAR">LPAR installations</a>.
+And like the <code>ubuntu.ins</code> file there would tell the duo of
+<a href="https://en.wikipedia.org/wiki/Logical_partition">LPAR</a> and
+<a href="https://en.wikipedia.org/wiki/IBM_Hardware_Management_Console">HMC</a> how to load
+that into memory, we will have the
+<a href="https://www.syslinux.org/wiki/index.php?title=PXELINUX#Configuration">PXE config</a>
+do something very similar in our case.</p>
+<p>The following provides all we need for a basic netboot implementing a
+<a href="https://www.syslinux.org/wiki/index.php?title=Config">PXE configuration file</a>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ sudo mkdir -p /srv/tftp/pxelinux.cfg
+$ cat <span style="color:#e6db74">&lt;&lt; EOF | sudo tee /srv/tftp/pxelinux.cfg/default
+</span><span style="color:#e6db74">label ubuntu
+</span><span style="color:#e6db74">   kernel kernel.ubuntu
+</span><span style="color:#e6db74">   initrd initrd.ubuntu
+</span><span style="color:#e6db74">EOF</span>
+</code></pre></div><p>Then make the netboot kernel and initrd available in your tftp directory</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ sudo wget -P /srv/tftp http://ports.ubuntu.com/ubuntu-ports/dists/bionic/main/installer-s390x/current/images/generic/kernel.ubuntu
+$ sudo wget -P /srv/tftp http://ports.ubuntu.com/ubuntu-ports/dists/bionic/main/installer-s390x/current/images/generic/initrd.ubuntu
+</code></pre></div><h3 id="step-ii---prepare-a-guest">Step II - prepare a guest</h3>
+<p>I usually recommend using KVM through libvirt for most cases.
+Actually most of the time through <a href="https://help.ubuntu.com/lts/serverguide/cloud-images-and-uvtool.html">uvtool</a>
+which helps you to work with <a href="https://cloud-images.ubuntu.com/">cloud images</a> easily.</p>
+<p>We don&rsquo;t need uvtool today (strictly speaking we don&rsquo;t need libvirt either, but it makes things more readable and easier), so just get libvirt and qemu-kvm.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ sudo apt install -qq -y libvirt-daemon-system qemu-kvm
+</code></pre></div><p>We have to tell the guest that it is supposed to netboot, the change diverging from a usual KVM Guest configuration is:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;boot</span> <span style="color:#a6e22e">dev=</span><span style="color:#e6db74">&#39;network&#39;</span><span style="color:#f92672">/&gt;</span>
+</code></pre></div><p>And we also want to give it a new virtual disk to work on, so let us create one:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ sudo qemu-img create -f qcow2 /var/lib/libvirt/images/blog-netboot.qcow2 8G
+Formatting <span style="color:#e6db74">&#39;/var/lib/libvirt/images/blog-netboot.qcow2&#39;</span>, fmt<span style="color:#f92672">=</span>qcow2 size<span style="color:#f92672">=</span><span style="color:#ae81ff">8589934592</span> cluster_size<span style="color:#f92672">=</span><span style="color:#ae81ff">65536</span> lazy_refcounts<span style="color:#f92672">=</span>off refcount_bits<span style="color:#f92672">=</span><span style="color:#ae81ff">16</span>
+</code></pre></div><p>This disk is configured the usual way following the <a href="https://libvirt.org/formatdomain.html">libvirt domain format</a>.</p>
+<p>An example of a full guest XML definition for this looks like <a href="/004-guest.xml">this</a></p>
+<p>You can now define your guest from that XML with virsh:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ virsh define blog-netboot.xml
+</code></pre></div><h3 id="step-iii---prepare-guest-network">Step III - prepare guest network</h3>
+<p>Libvirt can provide the tftp service for you through the dnsmasq daemon that it will spawn anyway.
+To do so add a snippet like the following to your default network configuration.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;tftp</span> <span style="color:#a6e22e">root=</span><span style="color:#e6db74">&#39;/srv/tftp&#39;</span><span style="color:#f92672">/&gt;</span>
+</code></pre></div><p>Afterwards you will need to destroy and start your network to pick up those changes.
+Warning: this will kill networking to any guests currently active on that network!</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ virsh net-destroy default
+<span style="color:#75715e"># Add the tftp line</span>
+$ virsh net-edit default
+$ virsh net-start default
+</code></pre></div><p>If you want to check, you will see the options <code>enable-tftp</code> and <code>tftp-root=/srv/tftp</code> in the dnsmasq config file <code>/var/lib/libvirt/dnsmasq/default.conf</code> due to that.</p>
+<p>A full XML for an example default network would then look like <a href="/004-network.xml">this</a></p>
+<h3 id="step-iv---start-your-guest">Step IV - start your guest</h3>
+<p>Now all you need is set up, you have:</p>
+<ul>
+<li>a netboot kernel/initrd to serve</li>
+<li>a libvirt network definition serving those files</li>
+<li>a PXE configuration that will make use of it</li>
+<li>a libvirt guest definition doing netboot</li>
+</ul>
+<p>To see the early boot actions start it with &ndash;console.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ virsh start --console blog-netboot
+Domain blog-netboot started
+Connected to domain blog-netboot
+Escape character is ^<span style="color:#f92672">]</span>
+<span style="color:#66d9ef">done</span>
+  Using IPv4 address: 192.168.122.54
+  Using TFTP server: 192.168.122.1
+Trying pxelinux.cfg files...
+  Receiving data:  <span style="color:#ae81ff">0</span> KBytes
+  TFTP: Received pxelinux.cfg/default <span style="color:#f92672">(</span><span style="color:#ae81ff">61</span> bytes<span style="color:#f92672">)</span>
+Loading pxelinux.cfg entry <span style="color:#e6db74">&#39;ubuntu&#39;</span>
+  Receiving data:  <span style="color:#ae81ff">4092</span> KBytes
+  TFTP: Received kernel.ubuntu <span style="color:#f92672">(</span><span style="color:#ae81ff">4092</span> KBytes<span style="color:#f92672">)</span>
+  Receiving data:  <span style="color:#ae81ff">13354</span> KBytes
+  TFTP: Received initrd.ubuntu <span style="color:#f92672">(</span><span style="color:#ae81ff">13354</span> KBytes<span style="color:#f92672">)</span>
+Network loading <span style="color:#66d9ef">done</span>, starting kernel...
+
+<span style="color:#f92672">[</span>    0.437599<span style="color:#f92672">]</span> Linux version 4.18.0-10-generic <span style="color:#f92672">(</span>buildd@bos02-s390x-011<span style="color:#f92672">)</span> <span style="color:#f92672">(</span>gcc version 8.2.0 <span style="color:#f92672">(</span>Ubuntu 8.2.0-7ubuntu1<span style="color:#f92672">))</span> <span style="color:#75715e">#11-Ubuntu SMP Thu Oct 11 15:06:06 UTC 2018 (Ubuntu 4.18.0-10.11-generic 4.18.12)</span>
+<span style="color:#f92672">[</span>    0.437606<span style="color:#f92672">]</span> setup.289988: Linux is running under KVM in 64-bit mode
+</code></pre></div><p>That is it, working fine following common PXE specifications to configure and use it.
+From here it depends on your actual needs which way you want to go further with this.</p>
+<h3 id="outlook-and-next-steps">Outlook and next steps</h3>
+<p>To boot the <a href="http://ports.ubuntu.com/ubuntu-ports/dists/bionic/main/installer-s390x/current/images/generic/">netboot installer</a> was just a nice example and quite close to compare it to older instructions.
+But I recommend to become more cloudy and consider booting cloud images like that.
+You can do so ephemeral or with a config that makes it install to an attached disk.
+And this is not only a great use case, it also is <a href="https://tutorials.ubuntu.com/tutorial/create-kvm-pods-with-maas#0">easy</a>
+and already available via <a href="https://blog.ubuntu.com/2017/10/18/maas-kvm-pods">MAAS KVM Pods</a>.</p>
+<p>I&rsquo;m happy that backporting the changes to the <a href="https://wiki.qemu.org/ChangeLog/2.11">qemu 2.11</a>
+that is in <a href="http://releases.ubuntu.com/18.04/">Ubuntu 18.04</a> will make this
+available to all our <a href="https://wiki.ubuntu.com/LTS">Ubuntu LTS</a> users.</p>
+<h3 id="further-references">Further References:</h3>
+<ul>
+<li>Old style upstream s390x KVM <a href="https://github.com/ibm-s390-tools/s390-tools/tree/master/netboot">netboot</a></li>
+<li>Old style Ubuntu s390x KVM <a href="http://ubuntu-on-big-iron.blogspot.com/2017/12/pxe-netboot-kvm-s390x.html">netboot</a></li>
+<li>Upstream Syslinux page about <a href="https://www.syslinux.org/wiki/index.php?title=PXELINUX">PXE</a></li>
+<li>Ubuntu community on <a href="https://help.ubuntu.com/community/Installation/QuickNetboot">netboot</a> in general</li>
+</ul>
+</div>
+
+    
+    
+
+    
+
+    
+
+</main>
+
+        <footer>
+
+            <p class="copyright text-muted">© 2018-2020 Christian Ehrhardt - Powered by <a href="https://gohugo.io">Hugo</a> and <a href="https://github.com/calintat/minimal">Minimal</a></p>
+
+        </footer>
+       
+    </body>
+
+</html>
+
