@@ -18,8 +18,11 @@ often see in the "Memory backends" of the [changelogs](https://wiki.qemu.org/Cha
 This got further improved, stabilized and in [Libvirt 8.2](https://libvirt.org/news.html#v8-2-0-2022-04-01)
 got exposure to higher management levels. There as well several fixups landed in
 later releases. Look for the details on [memory backing configuration](https://libvirt.org/formatdomain.html#memory-backing) to try it.
-IMHO all that today (April 2024) improves the situation a lot and one can
-indeed use those features to see it starting much faster in a recent
+This isn't fixing all of this, but at the same time the developers of
+the other components, like the kernel, haven't been idling either (but there
+it is harder for me to point to a single change).
+IMHO all that combined today (April 2024) improves the situation a lot and
+one can use those features to see it starting much faster in a recent
 Ubuntu 24.04 Noble than what I found back in 2019 when analyzing this the
 first time. Proper numa config was always important for guests of this size
 and also is important for this initialization.
