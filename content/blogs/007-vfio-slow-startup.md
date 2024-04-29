@@ -1,6 +1,6 @@
 ---
 title: "Slow VFIO guest startup"
-date: 2019-09-03T12:08:27+02:00
+date: 2024-04-28T12:08:27+02:00
 tags: ["vfio", "iommu", "qemu", "passthrough"]
 draft: false
 ---
@@ -10,6 +10,19 @@ draft: false
 
 Disclaimer: for now this is about the debugging where the time sink is, it mentions ways to mitigate some effects but not a fix.
 If later a fix comes up I'll update.
+
+### 2024 Update ###
+
+To overcome this Qemu added and evolved pre-allocation quite a bit as you can
+often see in the "Memory backends" of the [changelogs](https://wiki.qemu.org/ChangeLog/5.0) of 5.0 and later.
+This got further improved, stabilized and in [Libvirt 8.2](https://libvirt.org/news.html#v8-2-0-2022-04-01)
+got exposure to higher management levels. There as well several fixups landed in
+later releases. Look for the details on [memory backing configuration](https://libvirt.org/formatdomain.html#memory-backing) to try it.
+IMHO all that today (April 2024) improves the situation a lot and one can
+indeed use those features to see it starting much faster in a recent
+Ubuntu 24.04 Noble than what I found back in 2019 when analyzing this the
+first time. Proper numa config was always important for guests of this size
+and also is important for this initialization.
 
 ### Symptom: classic linear scaling at work ###
 
