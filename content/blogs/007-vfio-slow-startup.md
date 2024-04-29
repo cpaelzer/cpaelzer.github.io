@@ -75,7 +75,7 @@ Extending the table above
 ```
 
 So hugepages help a lot in this case, but all of you who already set up huge pages know it.
-Pre-allocating and distributing them among guest sis admin/management effort that has its costs in other places.
+Pre-allocating and distributing them among guest is admin/management effort that has its costs in other places.
 
 ### Check where time is lost - part I: Userspace ###
 
